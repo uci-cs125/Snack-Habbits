@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController, SettingsControllerDelegate, LoginControllerDelegate {
+class HomeViewController: UIViewController, LoginControllerDelegate {
 
     
     

@@ -184,15 +184,15 @@ class SettingsTableViewController: UITableViewController {
             cell.textField.text = user?.name
             cell.textField.addTarget(self, action: #selector(handleNameChanged), for: .editingChanged)
         case 2:
-            cell.textField.placeholder = "Enter Name"
-            cell.textField.text = user?.name
-            cell.textField.addTarget(self, action: #selector(handleNameChanged), for: .editingChanged)
-        case 3:
             cell.textField.placeholder = "Enter Age"
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
             cell.textField.addTarget(self, action: #selector(handleAgeChanged), for: .editingChanged)
+        case 3:
+            cell.textField.placeholder = "Enter Name"
+            cell.textField.text = user?.name
+            cell.textField.addTarget(self, action: #selector(handleNameChanged), for: .editingChanged)
         default:
             cell.textField.placeholder = "Enter Bio"
         }
