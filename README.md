@@ -9,4 +9,4 @@ $pod install
 
 3.) In Xcode open the .xcworkspace file. 
 
-4.) Hit Run. 
+4.) Hit Run. (Note: I'm only testing on the iPhone 11 simulator)
