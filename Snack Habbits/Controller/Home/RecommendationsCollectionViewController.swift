@@ -7,20 +7,28 @@
 //
 
 import UIKit
+import Firebase
 
-
-class RecommendationsCollectionViewController: BaseCollectionViewController {
+class RecommendationsCollectionViewController: BaseCollectionViewController, LoginControllerDelegate {
+    func didFinishLoggingIn() {
+        
+    }
+    
 
     //MARK:- Properties
     private let recommentationResultCellId = "recommendationCell"
     private var recommendationResults = [Result]()
+    private var user: User?
     
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
-        setupSearchBar()
+        //setupNavigationController()
         
+        let settingsbutton = UIBarButtonItem(image:  #imageLiteral(resourceName: "top_left_profile"), style: .plain, target: self, action: #selector(handleSettingsButtonTapped))
+        settingsbutton.tintColor = .gray
+        self.navigationItem.leftBarButtonItem = settingsbutton
         APIService.shared.fetchMeals(searchTerm: "random") { (results, error) in
             
             if let error = error {
@@ -36,16 +44,24 @@ class RecommendationsCollectionViewController: BaseCollectionViewController {
         } // END APIService
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if Auth.auth().currentUser == nil {
+            let loginController = LoginViewController()
+            loginController.delegate = self
+            let navController = UINavigationController(rootViewController: loginController)
+            navController.modalPresentationStyle = .fullScreen
+            present(navController, animated: true)
+        }
+    }
+    
     //MARK:- Setup
     private func setupCollectionView() {
         collectionView?.backgroundColor = .white
         collectionView?.register(RecommendationResultCell.self, forCellWithReuseIdentifier: recommentationResultCellId)
     }
     
-    private func setupSearchBar() {
-        definesPresentationContext = true
-        navigationItem.hidesSearchBarWhenScrolling = false
-    }
     
     
     //MARK:- Collection View Delegate
@@ -53,6 +69,7 @@ class RecommendationsCollectionViewController: BaseCollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: recommentationResultCellId, for: indexPath) as! RecommendationResultCell
         let recommendationResult = recommendationResults[indexPath.item]
         cell.result = recommendationResult
+
         return cell
     }
     
@@ -65,12 +82,42 @@ class RecommendationsCollectionViewController: BaseCollectionViewController {
 //        let resultDetailController = ResultDetailController(appId: appId)
 //        navigationController?.pushViewController(appDetailController, animated: true)
     }
+    
+    
+    @objc private func handleSettingsButtonTapped()
+    {
+        let settingsController = SettingsTableViewController()
+        let navController = UINavigationController(rootViewController: settingsController)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
+    }
+    
+    //MARK:- Firestore
+    private func fetchCurrentUser(){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("users").document(uid).getDocument { (documentSnapshot, error) in
+            if let error = error {
+                print("****Error fetching current User:", error)
+                return
+            }
+            guard let dictionary = documentSnapshot?.data() else { return }
+            self.user = User(dictionary: dictionary)
+        }
+
+    }
 }
 
 //MARK:- Collection View Flow Layout Delegate
 extension RecommendationsCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 300)
+        return CGSize(width: view.frame.width - 32, height: 300)
     }
+}
+
+//MARK:- Settings Delegate
+extension RecommendationsCollectionViewController: SettingsControllerDelegate {
+    func didSaveSettings() {
+        fetchCurrentUser()
+    }
+    
 }

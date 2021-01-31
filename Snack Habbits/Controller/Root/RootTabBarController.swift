@@ -10,10 +10,14 @@ import UIKit
 
 class RootTabBarController: UITabBarController {
 
+    
+    let gVar = "Test"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupViewControllers()
+
     }
     
     //MARK:- Setup
@@ -34,11 +38,19 @@ class RootTabBarController: UITabBarController {
        // navController.navigationBar.prefersLargeTitles = true
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
+        navController.navigationBar.prefersLargeTitles = true
+
+
         
         rootViewController.navigationItem.title = title
         rootViewController.view.backgroundColor = .white
         
         return navController
+    }
+    
+    @objc private func handleSettingsButtonTapped()
+    {
+        
     }
 
 }

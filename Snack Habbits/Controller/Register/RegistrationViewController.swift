@@ -192,7 +192,12 @@ class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: error)
                 return
             }
+            
         }
+        
+
+        
+        
     }
     
     
@@ -247,9 +252,14 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc private func handleGoToLogin() {
-        let loginController = LoginViewController()
-        loginController.view.backgroundColor = .yellow
-        navigationController?.pushViewController(loginController, animated: true)
+        if let nav = navigationController?.popViewController(animated: true) {
+            print("Popped")
+        } else
+        {
+            navigationController?.pushViewController(LoginViewController(), animated: true)
+//            present(RegistrationViewController(), animated: true)
+            
+        }
     }
     
     //MARK:- HUD

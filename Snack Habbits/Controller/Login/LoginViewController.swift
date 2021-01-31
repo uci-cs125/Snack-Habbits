@@ -81,7 +81,7 @@ class LoginViewController: UIViewController {
     
     fileprivate let backToRegisterButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Go back", for: .normal)
+        button.setTitle("Register", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         button.addTarget(self, action: #selector(handleBack), for: .touchUpInside)
@@ -89,7 +89,14 @@ class LoginViewController: UIViewController {
     }()
     
     @objc fileprivate func handleBack() {
-        navigationController?.popViewController(animated: true)
+        if let nav = navigationController?.popViewController(animated: true) {
+            print("Popped")
+        } else
+        {
+            navigationController?.pushViewController(RegistrationViewController(), animated: true)
+//            present(RegistrationViewController(), animated: true)
+            
+        }
     }
 
     override func viewDidLoad() {

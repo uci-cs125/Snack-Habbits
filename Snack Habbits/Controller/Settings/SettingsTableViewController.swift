@@ -15,24 +15,59 @@ protocol SettingsControllerDelegate {
     func didSaveSettings()
 }
 
-class SettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 4
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if component == 0 {
+            return feetList.count
+        }else if component == 2 {
+            return inchList.count
+        }else {
+            return 1
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if component == 0 {
+            return "\(feetList[row])"
+        }else if component == 1 {
+            return "ft"
+        }else if component == 2 {
+            return "\(inchList[row])"
+        }else {
+            return "in"
+        }
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let feetIndex = pickerView.selectedRow(inComponent: 0)
+        let inchIndex = pickerView.selectedRow(inComponent: 2)
+        
+    }
+    
     
     //MARK:- Properties
+    let feetList = Array(3...9)
+
+    let inchList = Array(0...11)
+    
     var user: User?
     var delegate: SettingsControllerDelegate?
+    var pickerView: UIPickerView?
+    var toolBarAccessory: UIToolbar?
+    let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handleCancel))
+
+    let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //a flexible space between the two buttons
+    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDone))
     
     //MARK:- UI Elements
-    lazy var image1Button = createButton(selector: #selector(handleSelectPhoto))
 
     lazy var header: UIView = {
         let header = UIView()
-        header.addSubview(image1Button)
-        
         let padding: CGFloat = 16
-        
-        image1Button.anchor(top: header.topAnchor, leading: header.leadingAnchor, bottom: header.bottomAnchor, trailing: header.trailingAnchor, padding: .init(top: padding, left: padding, bottom: padding, right: padding))
-        image1Button.widthAnchor.constraint(equalTo: header.widthAnchor, multiplier : 0.45).isActive = true
-        
         return header
     }()
     
@@ -41,14 +76,34 @@ class SettingsTableViewController: UITableViewController {
     //MARK:- Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchCurrentUser()
         setupNavigationBar()
         setupTableView()
-        fetchCurrentUser()
+        
+        
+        pickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+        self.pickerView?.delegate = self
+        self.pickerView?.dataSource = self
+        self.pickerView!.backgroundColor = UIColor.white
+        pickerView?.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        
+        toolBarAccessory = UIToolbar()
+        toolBarAccessory?.autoresizingMask = .flexibleHeight
+        toolBarAccessory?.barStyle = .default
+        toolBarAccessory?.barTintColor = UIColor.red
+        toolBarAccessory?.backgroundColor = UIColor.red
+        toolBarAccessory?.isTranslucent = false
+        toolBarAccessory?.isUserInteractionEnabled = true
+        
+        var frame = toolBarAccessory?.frame
+        frame?.size.height = 44.0
+        toolBarAccessory?.frame = frame!
+        
+        toolBarAccessory?.items = [cancelButton, flexSpace, doneButton]
         
     }
     
 
-    
     //MARK:- Setup
     private func setupTableView() {
         tableView.backgroundColor = UIColor(white: 0.95, alpha: 1)
@@ -80,22 +135,13 @@ class SettingsTableViewController: UITableViewController {
             }
             guard let dictionary = documentSnapshot?.data() else { return }
             self.user = User(dictionary: dictionary)
-            self.loadUserPhotos()
-            self.tableView.reloadData()
+            
         }
+        
+        tableView.reloadData()
     }
     
     
-    private func loadUserPhotos() {
-        if let imageUrl = user?.imageUrl1, let url = URL(string: imageUrl) {
-            // uses this to cache images so we dont re fetch images from internet
-            SDWebImageManager.shared().loadImage(with: url, options: .continueInBackground, progress: nil) { (image, _, _, _, _, _) in
-                self.image1Button.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
-            }
-        }
-        
-        
-    }
     
     
     
@@ -105,6 +151,20 @@ class SettingsTableViewController: UITableViewController {
         dismiss(animated: true)
     }
     
+    @objc private func handleDone() {
+        let indexPath = IndexPath(row: 0, section: 4)
+        
+        if let cell = self.tableView.cellForRow(at:indexPath) as? SettingsCell
+        {
+            
+            guard let feet = pickerView?.selectedRow(inComponent: 0) else { return }
+            guard let inches = pickerView?.selectedRow(inComponent: 2) else { return }
+            cell.textField.text = "\(feetList[feet]) feet \(inchList[inches]) inches"
+            cell.textField.endEditing(true)
+        }
+        
+        view.endEditing(true)
+    }
     
     @objc private func handleSave() {
         
@@ -112,9 +172,11 @@ class SettingsTableViewController: UITableViewController {
         
         let docData: [String: Any] = [
             "uid": uid,
-            "imageUrl1": user?.imageUrl1 ?? "",
             "fullName": user?.name ?? "",
             "age": user?.age ?? -1,
+            "weight": user?.weight ?? 0.0,
+            "height": user?.height ?? ""
+            
         ]
         
         let hud = JGProgressHUD(style: .dark)
@@ -152,14 +214,16 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    
-    @objc private func handleSelectPhoto(button: UIButton) {
-        let imagePicker = CustomImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.imageButton = button
-        present(imagePicker, animated: true)
+    @objc private func handleWeightChanged(textField: UITextField){
+        if let newWeight = Float(textField.text ?? "") {
+             user?.weight = newWeight
+        }
     }
     
+    @objc private func handleHeightChanged(textField: UITextField){
+        print("height changed")
+            user?.height = textField.text
+    }
     
     
     
@@ -170,29 +234,46 @@ class SettingsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 0 : 1
+        return 1
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = SettingsCell(style: .default, reuseIdentifier: nil)
-        
+        cell.textField.delegate = self
+
+        cell.textField.returnKeyType = UIReturnKeyType.done
         switch indexPath.section {
-        case 1:
+        case 0:
             cell.textField.placeholder = "Enter Name"
             cell.textField.text = user?.name
             cell.textField.addTarget(self, action: #selector(handleNameChanged), for: .editingChanged)
-        case 2:
+        case 1:
+            
             cell.textField.placeholder = "Enter Age"
             if let age = user?.age {
                 cell.textField.text = String(age)
             }
+            cell.textField.keyboardType = .asciiCapableNumberPad
             cell.textField.addTarget(self, action: #selector(handleAgeChanged), for: .editingChanged)
+        case 2:
+            
+            cell.textField.placeholder = "Enter Gender"
+            //cell.textField.addTarget(self, action: #selector(handleAgeChanged), for: .editingChanged)
         case 3:
-            cell.textField.placeholder = "Enter Name"
-            cell.textField.text = user?.name
-            cell.textField.addTarget(self, action: #selector(handleNameChanged), for: .editingChanged)
+            
+            cell.textField.placeholder = "Enter Weight"
+            cell.textField.keyboardType = .decimalPad
+            cell.textField.text = String(user?.weight?.description ?? "-")
+            cell.textField.addTarget(self, action: #selector(handleWeightChanged), for: .editingChanged)
+        case 4:
+           
+            cell.textField.placeholder = "Enter Height"
+            cell.textField.inputView = pickerView
+            cell.textField.inputAccessoryView = toolBarAccessory
+            cell.textField.text = user?.height ?? ""
+            cell.textField.addTarget(self, action: #selector(handleHeightChanged), for: .editingDidEnd)
         default:
             cell.textField.placeholder = "Enter Bio"
         }
@@ -210,15 +291,15 @@ class SettingsTableViewController: UITableViewController {
         
         switch section {
         case 0:
-            return header
+            headerLabel.text = "Name"
         case 1:
-            headerLabel.text = "Name"
-        case 2:
-            headerLabel.text = "Name"
-        case 3:
             headerLabel.text = "Age"
+        case 2:
+            headerLabel.text = "Gender"
+        case 3:
+            headerLabel.text = "Weight"
         case 4:
-            headerLabel.text = "Bio"
+            headerLabel.text = "Height"
         default:
             headerLabel.text = "Name"
         }
@@ -228,77 +309,31 @@ class SettingsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
-             return 300
-        }
+//        if section == 0 {
+//             return 150
+//        }
         return 40
     }
     
-    
-    
-    //MARK:- Helpers
-    private func createButton(selector: Selector) -> UIButton {
-        let button = UIButton(type: .system)
-        button.setTitle("Select photo", for: .normal)
-        button.backgroundColor = .white
-        button.addTarget(self, action: selector, for: .touchUpInside)
-        button.imageView?.contentMode = .scaleAspectFill
-        button.layer.cornerRadius = 8
-        button.clipsToBounds = true
-        return button
-    }
+
+
 }
 
-
-
-//MARK:- Image Picker Delegate
-extension SettingsTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[.originalImage] as? UIImage
-        let imageButton = (picker as? CustomImagePickerController)?.imageButton
-        imageButton?.setImage(selectedImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        dismiss(animated: true)
-        
-        
-        let fileName = UUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/images/\(fileName)")
-        guard let uploadData = selectedImage?.jpegData(compressionQuality: 0.75) else { return }
-        
-        let hud = JGProgressHUD(style: .dark)
-        hud.textLabel.text = "Uploading image"
-        hud.show(in: view)
-        ref.putData(uploadData, metadata: nil) { (nil, error) in
-           
-            if let error = error {
-                 hud.dismiss()
-                print("Failed to upload image to storage", error)
-                return
-            }
-            
-            ref.downloadURL(completion: { (url, error) in
-                hud.dismiss()
-                if let error = error {
-                    print("Failed to retrieve donwload url", error)
-                    return
-                }
-                
-                if imageButton == self.image1Button {
-                    self.user?.imageUrl1 = url?.absoluteString
-                } 
-                
-            })
-        }
-    }
-}
-
-// UI Custom Classes
-class CustomImagePickerController: UIImagePickerController {
-    var imageButton: UIButton?
-}
 
 class HeaderLabel: UILabel {
     override func draw(_ rect: CGRect) {
         super.drawText(in: rect.insetBy(dx: 16, dy: 0))
     }
+}
+
+
+//MARK:- Text Field Delegate
+extension SettingsTableViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+
 }
