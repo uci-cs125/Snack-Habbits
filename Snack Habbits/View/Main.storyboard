@@ -648,34 +648,192 @@
             </objects>
             <point key="canvasLocation" x="-81" y="-1497"/>
         </scene>
-        <!--Meal Input Table View Controller-->
+        <!--Today's Meals-->
         <scene sceneID="TuP-A0-jlQ">
             <objects>
-                <tableViewController id="HJO-uC-Zry" customClass="MealInputTableViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rBz-Yt-lTx">
+                <tableViewController title="Today's Meals" id="HJO-uC-Zry" customClass="TodaysMealsTableViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rBz-Yt-lTx">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="38M-3d-hM2">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="38M-3d-hM2" id="Z9r-oQ-YdS">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
+                        <sections>
+                            <tableViewSection id="Hda-Uk-ifI">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="38M-3d-hM2">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="38M-3d-hM2" id="Z9r-oQ-YdS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Zua-fe-dCW">
+                                        <rect key="frame" x="0.0" y="71.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zua-fe-dCW" id="401-dP-Nsx">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="N5M-lA-e1O">
+                                        <rect key="frame" x="0.0" y="115" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="N5M-lA-e1O" id="vkL-mq-Xbl">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
                         <connections>
                             <outlet property="dataSource" destination="HJO-uC-Zry" id="qyj-9R-qeV"/>
                             <outlet property="delegate" destination="HJO-uC-Zry" id="0Hv-xE-1ty"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="jnP-MM-Z1T"/>
+                    <navigationItem key="navigationItem" title="Todays Meals" largeTitleDisplayMode="always" id="jnP-MM-Z1T">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="95C-Zr-Osd"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="vrs-U7-DOb">
+                            <connections>
+                                <segue destination="BLC-Zw-CIo" kind="show" identifier="InputMeal" id="nJ7-qJ-U4S"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTE-e6-hWC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="735" y="-1493"/>
+            <point key="canvasLocation" x="709" y="-1497"/>
+        </scene>
+        <!--Meal Input Table View Controller-->
+        <scene sceneID="JfC-QY-bvg">
+            <objects>
+                <tableViewController id="BLC-Zw-CIo" customClass="MealInputTableViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="pyB-oL-SfY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection id="Scw-OG-FGp">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2FS-MW-8Fm">
+                                        <rect key="frame" x="20" y="18" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2FS-MW-8Fm" id="41a-CS-M3L">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Meal Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GRt-9W-mdc">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="GRt-9W-mdc" firstAttribute="top" secondItem="41a-CS-M3L" secondAttribute="top" id="BMY-7I-GF6"/>
+                                                <constraint firstAttribute="bottom" secondItem="GRt-9W-mdc" secondAttribute="bottom" id="IA5-9L-JaO"/>
+                                                <constraint firstAttribute="trailing" secondItem="GRt-9W-mdc" secondAttribute="trailing" constant="20" symbolic="YES" id="Rcg-bj-koV"/>
+                                                <constraint firstItem="GRt-9W-mdc" firstAttribute="leading" secondItem="41a-CS-M3L" secondAttribute="leading" constant="20" symbolic="YES" id="Uny-9p-bGn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="JRz-J9-uTl">
+                                        <rect key="frame" x="20" y="61.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JRz-J9-uTl" id="ABT-zR-fuG">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Calories " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RKF-7g-dDV">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="RKF-7g-dDV" secondAttribute="bottom" id="HiO-YD-o1p"/>
+                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="top" secondItem="ABT-zR-fuG" secondAttribute="top" id="NTQ-DI-Wew"/>
+                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="leading" secondItem="ABT-zR-fuG" secondAttribute="leading" constant="20" symbolic="YES" id="k0D-FV-RRZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="RKF-7g-dDV" secondAttribute="trailing" constant="20" symbolic="YES" id="pPX-Px-z3e"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="IVR-Ch-VX7">
+                                        <rect key="frame" x="20" y="105" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IVR-Ch-VX7" id="qbN-wv-XPf">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Fat (g) " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tTH-Dh-HSD">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="tTH-Dh-HSD" secondAttribute="trailing" constant="20" symbolic="YES" id="Jsl-Ja-uEK"/>
+                                                <constraint firstAttribute="bottom" secondItem="tTH-Dh-HSD" secondAttribute="bottom" id="eq4-BT-DcE"/>
+                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="top" secondItem="qbN-wv-XPf" secondAttribute="top" id="fsk-uW-SrT"/>
+                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="leading" secondItem="qbN-wv-XPf" secondAttribute="leading" constant="20" symbolic="YES" id="kwB-W4-SG6"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="AqI-QY-FsL">
+                                        <rect key="frame" x="20" y="148.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AqI-QY-FsL" id="poM-tl-E89">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Carbs (g)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9F-Ap-c0b">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="T9F-Ap-c0b" secondAttribute="trailing" constant="20" symbolic="YES" id="DDR-5E-g5E"/>
+                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="leading" secondItem="poM-tl-E89" secondAttribute="leading" constant="20" symbolic="YES" id="QT8-gw-MI7"/>
+                                                <constraint firstAttribute="bottom" secondItem="T9F-Ap-c0b" secondAttribute="bottom" id="gGK-uT-foR"/>
+                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="top" secondItem="poM-tl-E89" secondAttribute="top" id="mfZ-Cr-iQI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Vc4-mA-84q">
+                                        <rect key="frame" x="20" y="192" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vc4-mA-84q" id="v29-rC-uk6">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Protein (g)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Cm-GB-G2A">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="44"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="top" secondItem="v29-rC-uk6" secondAttribute="top" id="8iS-LU-Hkh"/>
+                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="leading" secondItem="v29-rC-uk6" secondAttribute="leading" constant="20" symbolic="YES" id="QYj-qx-X2M"/>
+                                                <constraint firstAttribute="trailing" secondItem="0Cm-GB-G2A" secondAttribute="trailing" constant="20" symbolic="YES" id="t4R-51-oYL"/>
+                                                <constraint firstAttribute="bottom" secondItem="0Cm-GB-G2A" secondAttribute="bottom" id="v1H-sW-xj7"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="BLC-Zw-CIo" id="oET-UZ-Aal"/>
+                            <outlet property="delegate" destination="BLC-Zw-CIo" id="87v-F4-3kn"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="2ks-f4-tY1">
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="save" id="LcY-rm-MMM"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="49C-Eg-sbD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1473.913043478261" y="-1497.3214285714284"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
