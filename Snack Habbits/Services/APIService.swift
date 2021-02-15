@@ -10,8 +10,9 @@ import Foundation
 
 class APIService {
     static let shared = APIService()
-    
+    // TODO:- Use Date as part of query in order to return relevant results (Breakfast, Lunch, Dinner)
     func fetchMeals(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
+        getTime()
         let urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey=20e7627a1f524111abcd0589ce45265e&number=10&addRecipeNutrition=true"
         fetch(urlString: urlString, completion: completion)
     }
@@ -37,5 +38,13 @@ class APIService {
                 completion(nil, jsonErr)
             }
             }.resume() //END URLSession
+    }
+    
+    private func getTime() {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        print("Time: \(hour):\(minutes)")
     }
 }

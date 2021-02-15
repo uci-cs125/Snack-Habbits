@@ -22,6 +22,8 @@
 		F01D609C25D9D04000462E4D /* RecommendationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */; };
 		F01D60AF25DA27A400462E4D /* MealInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60AE25DA27A400462E4D /* MealInputTableViewController.swift */; };
 		F01D60B325DA2E3F00462E4D /* TodaysMealsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60B225DA2E3F00462E4D /* TodaysMealsTableViewController.swift */; };
+		F01D60B725DA303500462E4D /* RecommendationDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60B625DA303500462E4D /* RecommendationDetailTableViewController.swift */; };
+		F01D60BB25DA30F700462E4D /* RecommendationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60BA25DA30F700462E4D /* RecommendationsTableViewController.swift */; };
 		F021EE2625B4E701003EBF6F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2525B4E701003EBF6F /* Helper.swift */; };
 		F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */; };
 		F021EE2F25B4F73E003EBF6F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */; };
@@ -57,6 +59,8 @@
 		F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCollectionViewController.swift; sourceTree = "<group>"; };
 		F01D60AE25DA27A400462E4D /* MealInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInputTableViewController.swift; sourceTree = "<group>"; };
 		F01D60B225DA2E3F00462E4D /* TodaysMealsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysMealsTableViewController.swift; sourceTree = "<group>"; };
+		F01D60B625DA303500462E4D /* RecommendationDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationDetailTableViewController.swift; sourceTree = "<group>"; };
+		F01D60BA25DA30F700462E4D /* RecommendationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsTableViewController.swift; sourceTree = "<group>"; };
 		F021EE2525B4E701003EBF6F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -284,6 +288,8 @@
 			isa = PBXGroup;
 			children = (
 				F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */,
+				F01D60B625DA303500462E4D /* RecommendationDetailTableViewController.swift */,
+				F01D60BA25DA30F700462E4D /* RecommendationsTableViewController.swift */,
 			);
 			path = Recommendation;
 			sourceTree = "<group>";
@@ -440,6 +446,7 @@
 				F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */,
 				F089477F25B6532A00A888B1 /* User.swift in Sources */,
 				F01D609825D9CE1000462E4D /* RecommendationCollectionViewCell.swift in Sources */,
+				F01D60B725DA303500462E4D /* RecommendationDetailTableViewController.swift in Sources */,
 				F01D607D25D9B28D00462E4D /* SettingsTableViewController.swift in Sources */,
 				F058D0D625C5FAEE00325DF1 /* APIService.swift in Sources */,
 				F089473025B6167D00A888B1 /* RegistrationViewModel.swift in Sources */,
@@ -448,6 +455,7 @@
 				F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */,
 				F01D609C25D9D04000462E4D /* RecommendationsCollectionViewController.swift in Sources */,
 				F01D60B325DA2E3F00462E4D /* TodaysMealsTableViewController.swift in Sources */,
+				F01D60BB25DA30F700462E4D /* RecommendationsTableViewController.swift in Sources */,
 				F01C895A25B4BAE900D54CFD /* AppDelegate.swift in Sources */,
 				F058D0DA25C636FD00325DF1 /* CustomPickerView.swift in Sources */,
 				F01C895C25B4BAE900D54CFD /* SceneDelegate.swift in Sources */,
