@@ -115,7 +115,7 @@ class SettingsTableViewController: UITableViewController {
         user.name = nameTextField.text
         user.weight = Float(currentWeightTextField.text!)
         user.age = Int(ageTextField.text!)
-        
+        print("uid: ", uid)
         let docData: [String: Any] = [
             "uid": "123945654",
             "fullName": user.name,
@@ -141,7 +141,7 @@ class SettingsTableViewController: UITableViewController {
             self.navigationController?.popViewController(animated: true)
             self.delegate?.didSaveSettings(user: self.user)
         }
-        
+        print("Saved settings:", docData)
         
     }
     

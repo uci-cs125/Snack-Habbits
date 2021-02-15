@@ -16,7 +16,7 @@ struct SearchResult: Decodable {
 
 struct Result: Decodable {
     
-    let id:             Int
+    let _id:            String
     let image:          String
     let title:          String
     let nutrition:      Nutrition
