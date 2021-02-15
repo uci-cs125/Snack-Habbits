@@ -10,24 +10,29 @@
 		6D386D66A214F48CC4B99961 /* Pods_Snack_Habbits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5747CE7E50820EF9596CA04A /* Pods_Snack_Habbits.framework */; };
 		F01C895A25B4BAE900D54CFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C895925B4BAE900D54CFD /* AppDelegate.swift */; };
 		F01C895C25B4BAE900D54CFD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C895B25B4BAE900D54CFD /* SceneDelegate.swift */; };
-		F01C895E25B4BAE900D54CFD /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C895D25B4BAE900D54CFD /* HomeViewController.swift */; };
 		F01C896125B4BAE900D54CFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01C895F25B4BAE900D54CFD /* Main.storyboard */; };
 		F01C896325B4BAEA00D54CFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F01C896225B4BAEA00D54CFD /* Assets.xcassets */; };
 		F01C896625B4BAEA00D54CFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01C896425B4BAEA00D54CFD /* LaunchScreen.storyboard */; };
 		F01C897625B4BF6400D54CFD /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01C897525B4BF6400D54CFD /* UIView+Layout.swift */; };
-		F021EE2125B4D945003EBF6F /* HomeBottomControlsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2025B4D945003EBF6F /* HomeBottomControlsStackView.swift */; };
-		F021EE2325B4DE50003EBF6F /* HomeTopNavigationStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2225B4DE50003EBF6F /* HomeTopNavigationStackView.swift */; };
+		F01D607825D9B19A00462E4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F01D607725D9B19900462E4D /* Main.storyboard */; };
+		F01D607D25D9B28D00462E4D /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D607C25D9B28D00462E4D /* SettingsTableViewController.swift */; };
+		F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D607F25D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift */; };
+		F01D608325D9B2ED00462E4D /* SelectActivityLebelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D608225D9B2ED00462E4D /* SelectActivityLebelTableViewController.swift */; };
+		F01D609825D9CE1000462E4D /* RecommendationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D609725D9CE1000462E4D /* RecommendationCollectionViewCell.swift */; };
+		F01D609C25D9D04000462E4D /* RecommendationsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */; };
+		F01D60AF25DA27A400462E4D /* MealInputTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60AE25DA27A400462E4D /* MealInputTableViewController.swift */; };
 		F021EE2625B4E701003EBF6F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2525B4E701003EBF6F /* Helper.swift */; };
 		F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */; };
 		F021EE2F25B4F73E003EBF6F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */; };
-		F058B27725B67763002E02F5 /* SettingsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058B27625B67763002E02F5 /* SettingsHeader.swift */; };
 		F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058B27A25B694EA002E02F5 /* LoginViewController.swift */; };
 		F058B27F25B694FC002E02F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058B27E25B694FC002E02F5 /* LoginViewModel.swift */; };
+		F058D0C625C5F33400325DF1 /* BaseCollectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058D0C525C5F33400325DF1 /* BaseCollectionCollectionViewController.swift */; };
+		F058D0D225C5F72C00325DF1 /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058D0D125C5F72C00325DF1 /* Recommendation.swift */; };
+		F058D0D625C5FAEE00325DF1 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058D0D525C5FAEE00325DF1 /* APIService.swift */; };
+		F058D0DA25C636FD00325DF1 /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058D0D925C636FD00325DF1 /* CustomPickerView.swift */; };
 		F089473025B6167D00A888B1 /* RegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089472F25B6167D00A888B1 /* RegistrationViewModel.swift */; };
 		F089474F25B62C5B00A888B1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F089474E25B62C5B00A888B1 /* GoogleService-Info.plist */; };
 		F089476E25B63B4400A888B1 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089476D25B63B4400A888B1 /* Bindable.swift */; };
-		F089477225B6503800A888B1 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089477125B6503800A888B1 /* SettingsTableViewController.swift */; };
-		F089477C25B6516000A888B1 /* SettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089477B25B6516000A888B1 /* SettingsCell.swift */; };
 		F089477F25B6532A00A888B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089477E25B6532A00A888B1 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,25 +43,30 @@
 		F01C895625B4BAE900D54CFD /* Snack Habbits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Snack Habbits.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F01C895925B4BAE900D54CFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F01C895B25B4BAE900D54CFD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		F01C895D25B4BAE900D54CFD /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F01C896025B4BAE900D54CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F01C896225B4BAEA00D54CFD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F01C896525B4BAEA00D54CFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F01C896725B4BAEA00D54CFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F01C897525B4BF6400D54CFD /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
-		F021EE2025B4D945003EBF6F /* HomeBottomControlsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomControlsStackView.swift; sourceTree = "<group>"; };
-		F021EE2225B4DE50003EBF6F /* HomeTopNavigationStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopNavigationStackView.swift; sourceTree = "<group>"; };
+		F01D607725D9B19900462E4D /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F01D607C25D9B28D00462E4D /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		F01D607F25D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWeeklyTargetTableViewController.swift; sourceTree = "<group>"; };
+		F01D608225D9B2ED00462E4D /* SelectActivityLebelTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectActivityLebelTableViewController.swift; sourceTree = "<group>"; };
+		F01D609725D9CE1000462E4D /* RecommendationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationCollectionViewCell.swift; sourceTree = "<group>"; };
+		F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCollectionViewController.swift; sourceTree = "<group>"; };
+		F01D60AE25DA27A400462E4D /* MealInputTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInputTableViewController.swift; sourceTree = "<group>"; };
 		F021EE2525B4E701003EBF6F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
-		F058B27625B67763002E02F5 /* SettingsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsHeader.swift; sourceTree = "<group>"; };
 		F058B27A25B694EA002E02F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F058B27E25B694FC002E02F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F058D0C525C5F33400325DF1 /* BaseCollectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCollectionViewController.swift; sourceTree = "<group>"; };
+		F058D0D125C5F72C00325DF1 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
+		F058D0D525C5FAEE00325DF1 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		F058D0D925C636FD00325DF1 /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		F089472F25B6167D00A888B1 /* RegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewModel.swift; sourceTree = "<group>"; };
 		F089474E25B62C5B00A888B1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F089476D25B63B4400A888B1 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
-		F089477125B6503800A888B1 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		F089477B25B6516000A888B1 /* SettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCell.swift; sourceTree = "<group>"; };
 		F089477E25B6532A00A888B1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +129,7 @@
 				F01C897125B4BEDE00D54CFD /* Configurations */,
 				F021EE2425B4E6C5003EBF6F /* Helpers */,
 				F089477525B650BF00A888B1 /* Protocols */,
+				F058D0D425C5F9F900325DF1 /* Services */,
 				F01C897325B4BEF600D54CFD /* Resources */,
 				F01C897225B4BEE700D54CFD /* Support Files */,
 			);
@@ -129,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				F089477E25B6532A00A888B1 /* User.swift */,
+				F058D0D125C5F72C00325DF1 /* Recommendation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -136,10 +148,10 @@
 		F01C896E25B4BECE00D54CFD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F01D607725D9B19900462E4D /* Main.storyboard */,
+				F058D0CC25C5F51300325DF1 /* Recommendations */,
 				F021EE2D25B4F716003EBF6F /* UIElements */,
 				F021EE2C25B4F701003EBF6F /* Register */,
-				F021EE2B25B4F6F1003EBF6F /* Home */,
-				F089477A25B6512A00A888B1 /* Settings */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -147,9 +159,11 @@
 		F01C896F25B4BED300D54CFD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F058D0C425C5F2EE00325DF1 /* Root */,
 				F058B27925B694AF002E02F5 /* Login */,
 				F089472E25B6165E00A888B1 /* Register */,
-				F089472D25B6165400A888B1 /* Home */,
+				F089472D25B6165400A888B1 /* Recommendation */,
+				F01D60AD25DA277B00462E4D /* MealInput */,
 				F089477025B6500800A888B1 /* Settings */,
 			);
 			path = Controller;
@@ -197,6 +211,14 @@
 			path = "App Delegate";
 			sourceTree = "<group>";
 		};
+		F01D60AD25DA277B00462E4D /* MealInput */ = {
+			isa = PBXGroup;
+			children = (
+				F01D60AE25DA27A400462E4D /* MealInputTableViewController.swift */,
+			);
+			path = MealInput;
+			sourceTree = "<group>";
+		};
 		F021EE2425B4E6C5003EBF6F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,15 +226,6 @@
 				F089476D25B63B4400A888B1 /* Bindable.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		F021EE2B25B4F6F1003EBF6F /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				F021EE2225B4DE50003EBF6F /* HomeTopNavigationStackView.swift */,
-				F021EE2025B4D945003EBF6F /* HomeBottomControlsStackView.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		F021EE2C25B4F701003EBF6F /* Register */ = {
@@ -226,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */,
+				F058D0D925C636FD00325DF1 /* CustomPickerView.swift */,
 			);
 			path = UIElements;
 			sourceTree = "<group>";
@@ -239,12 +253,36 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		F089472D25B6165400A888B1 /* Home */ = {
+		F058D0C425C5F2EE00325DF1 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				F01C895D25B4BAE900D54CFD /* HomeViewController.swift */,
+				F058D0C525C5F33400325DF1 /* BaseCollectionCollectionViewController.swift */,
 			);
-			path = Home;
+			path = Root;
+			sourceTree = "<group>";
+		};
+		F058D0CC25C5F51300325DF1 /* Recommendations */ = {
+			isa = PBXGroup;
+			children = (
+				F01D609725D9CE1000462E4D /* RecommendationCollectionViewCell.swift */,
+			);
+			path = Recommendations;
+			sourceTree = "<group>";
+		};
+		F058D0D425C5F9F900325DF1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F058D0D525C5FAEE00325DF1 /* APIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		F089472D25B6165400A888B1 /* Recommendation */ = {
+			isa = PBXGroup;
+			children = (
+				F01D609B25D9D04000462E4D /* RecommendationsCollectionViewController.swift */,
+			);
+			path = Recommendation;
 			sourceTree = "<group>";
 		};
 		F089472E25B6165E00A888B1 /* Register */ = {
@@ -259,7 +297,9 @@
 		F089477025B6500800A888B1 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				F089477125B6503800A888B1 /* SettingsTableViewController.swift */,
+				F01D607C25D9B28D00462E4D /* SettingsTableViewController.swift */,
+				F01D607F25D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift */,
+				F01D608225D9B2ED00462E4D /* SelectActivityLebelTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -269,15 +309,6 @@
 			children = (
 			);
 			path = Protocols;
-			sourceTree = "<group>";
-		};
-		F089477A25B6512A00A888B1 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				F089477B25B6516000A888B1 /* SettingsCell.swift */,
-				F058B27625B67763002E02F5 /* SettingsHeader.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -343,6 +374,7 @@
 				F01C896625B4BAEA00D54CFD /* LaunchScreen.storyboard in Resources */,
 				F089474F25B62C5B00A888B1 /* GoogleService-Info.plist in Resources */,
 				F01C896325B4BAEA00D54CFD /* Assets.xcassets in Resources */,
+				F01D607825D9B19A00462E4D /* Main.storyboard in Resources */,
 				F01C896125B4BAE900D54CFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,23 +428,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F021EE2325B4DE50003EBF6F /* HomeTopNavigationStackView.swift in Sources */,
+				F01D60AF25DA27A400462E4D /* MealInputTableViewController.swift in Sources */,
 				F021EE2625B4E701003EBF6F /* Helper.swift in Sources */,
 				F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */,
 				F01C897625B4BF6400D54CFD /* UIView+Layout.swift in Sources */,
-				F089477C25B6516000A888B1 /* SettingsCell.swift in Sources */,
-				F058B27725B67763002E02F5 /* SettingsHeader.swift in Sources */,
+				F058D0D225C5F72C00325DF1 /* Recommendation.swift in Sources */,
 				F089476E25B63B4400A888B1 /* Bindable.swift in Sources */,
+				F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */,
 				F089477F25B6532A00A888B1 /* User.swift in Sources */,
-				F01C895E25B4BAE900D54CFD /* HomeViewController.swift in Sources */,
+				F01D609825D9CE1000462E4D /* RecommendationCollectionViewCell.swift in Sources */,
+				F01D607D25D9B28D00462E4D /* SettingsTableViewController.swift in Sources */,
+				F058D0D625C5FAEE00325DF1 /* APIService.swift in Sources */,
 				F089473025B6167D00A888B1 /* RegistrationViewModel.swift in Sources */,
 				F058B27F25B694FC002E02F5 /* LoginViewModel.swift in Sources */,
-				F021EE2125B4D945003EBF6F /* HomeBottomControlsStackView.swift in Sources */,
-				F089477225B6503800A888B1 /* SettingsTableViewController.swift in Sources */,
+				F058D0C625C5F33400325DF1 /* BaseCollectionCollectionViewController.swift in Sources */,
 				F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */,
+				F01D609C25D9D04000462E4D /* RecommendationsCollectionViewController.swift in Sources */,
 				F01C895A25B4BAE900D54CFD /* AppDelegate.swift in Sources */,
+				F058D0DA25C636FD00325DF1 /* CustomPickerView.swift in Sources */,
 				F01C895C25B4BAE900D54CFD /* SceneDelegate.swift in Sources */,
 				F021EE2F25B4F73E003EBF6F /* CustomTextField.swift in Sources */,
+				F01D608325D9B2ED00462E4D /* SelectActivityLebelTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

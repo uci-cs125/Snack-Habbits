@@ -9,26 +9,35 @@
 import Foundation
 
 struct SearchResult: Decodable {
+    let number: Int
     let results: [Result]
-    
-    
-    enum CodingKeys: String, CodingKey {
-        case results = "meals"
-    }
 }
 
 
 struct Result: Decodable {
-    let name:           String
-    let mealNumber:     String
-
     
-    enum CodingKeys: String, CodingKey {
-        case name           = "strMeal"
-        case mealNumber     = "idMeal"
-    }
+    let id:             Int
+    let image:          String
+    let title:          String
+    let nutrition:      Nutrition
+    let vegetarian:     Bool
+    let vegan:          Bool
+    let glutenFree:     Bool
+    let dairyFree:      Bool
+    let sustainable:    Bool
+    let cheap:          Bool
+    let veryHealthy:    Bool
+    let aggregateLikes: Int
+}
 
-    
+struct Nutrition: Decodable {
+    let nutrients: [Nutrient]
+}
+
+struct Nutrient: Decodable {
+    let name: String
+    let amount: Double
+    let unit: String
 }
 
  

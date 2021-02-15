@@ -12,7 +12,7 @@ class APIService {
     static let shared = APIService()
     
     func fetchMeals(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
-        let urlString = "https://www.themealdb.com/api/json/v1/1/\(searchTerm).php"
+        let urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey=20e7627a1f524111abcd0589ce45265e&number=10&addRecipeNutrition=true"
         fetch(urlString: urlString, completion: completion)
     }
     

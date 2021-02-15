@@ -11,23 +11,26 @@ import Foundation
 import UIKit
 
 struct User {
-    
-    var uid: String?
-    var name: String?
-    var age: Int?
-    var height: String?
-    var weight: Float?
-    var gender: String?
+    var uid:            String?
+    var name:           String?
+    var age:            Int?
+    var heightFeet:     Int?
+    var heightInches:   Int?
+    var weight:         Float?
+    var weeklyTarget:   String?
+    var activityLevel:  String?
     
     init(dictionary: [String: Any]) {
         // Initialize user
-        self.uid = dictionary["uid"] as? String ?? ""
-        self.name = dictionary["fullName"] as? String ?? ""
-        self.age = dictionary["age"] as? Int
-        self.height = dictionary["height"] as? String ?? ""
-        self.weight = dictionary["weight"] as? Float 
-        
-        
+        self.uid            = dictionary["uid"]             as? String ?? ""
+        self.name           = dictionary["fullName"]        as? String ?? ""
+        self.age            = dictionary["age"]             as? Int
+        self.heightFeet     = dictionary["heightFeet"]      as? Int
+        self.heightInches   = dictionary["heightInches"]    as? Int
+        self.weight         = dictionary["weight"]          as? Float
+        self.weeklyTarget   = dictionary["weeklyTarget"]    as? String ?? ""
+        self.activityLevel  = dictionary["activityLevel"]   as? String ?? ""
     }
     
 }
+ 
