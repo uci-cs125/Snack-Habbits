@@ -45,11 +45,10 @@ class SettingsTableViewController: UITableViewController {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
-        //fetchCurrentUser()
+        fetchCurrentUser()
         updateActivityLevel()
         updateWeeklyTarget()
         updateHeightView()
-        
         nameTextField.text = user?.name ?? ""
         if let height = user?.heightFeet, let inches = user?.heightInches {
             heightLabel.text = "\(height) ft \(inches) in"
@@ -115,7 +114,7 @@ class SettingsTableViewController: UITableViewController {
         user.name = nameTextField.text
         user.weight = Float(currentWeightTextField.text!)
         user.age = Int(ageTextField.text!)
-        
+ 
         let docData: [String: Any] = [
             "uid": "123945654",
             "fullName": user.name,

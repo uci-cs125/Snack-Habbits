@@ -24,6 +24,7 @@
 		F01D60B325DA2E3F00462E4D /* TodaysMealsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60B225DA2E3F00462E4D /* TodaysMealsTableViewController.swift */; };
 		F01D60B725DA303500462E4D /* RecommendationDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60B625DA303500462E4D /* RecommendationDetailTableViewController.swift */; };
 		F01D60BB25DA30F700462E4D /* RecommendationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60BA25DA30F700462E4D /* RecommendationsTableViewController.swift */; };
+		F01D60BE25DB701500462E4D /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01D60BD25DB701500462E4D /* Meal.swift */; };
 		F021EE2625B4E701003EBF6F /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2525B4E701003EBF6F /* Helper.swift */; };
 		F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */; };
 		F021EE2F25B4F73E003EBF6F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */; };
@@ -61,6 +62,7 @@
 		F01D60B225DA2E3F00462E4D /* TodaysMealsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysMealsTableViewController.swift; sourceTree = "<group>"; };
 		F01D60B625DA303500462E4D /* RecommendationDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationDetailTableViewController.swift; sourceTree = "<group>"; };
 		F01D60BA25DA30F700462E4D /* RecommendationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsTableViewController.swift; sourceTree = "<group>"; };
+		F01D60BD25DB701500462E4D /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		F021EE2525B4E701003EBF6F /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				F089477E25B6532A00A888B1 /* User.swift */,
 				F058D0D125C5F72C00325DF1 /* Recommendation.swift */,
+				F01D60BD25DB701500462E4D /* Meal.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 				F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */,
 				F01C897625B4BF6400D54CFD /* UIView+Layout.swift in Sources */,
 				F058D0D225C5F72C00325DF1 /* Recommendation.swift in Sources */,
+				F01D60BE25DB701500462E4D /* Meal.swift in Sources */,
 				F089476E25B63B4400A888B1 /* Bindable.swift in Sources */,
 				F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */,
 				F089477F25B6532A00A888B1 /* User.swift in Sources */,
