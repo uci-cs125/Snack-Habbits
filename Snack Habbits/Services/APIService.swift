@@ -12,8 +12,9 @@ class APIService {
     static let shared = APIService()
     // TODO:- Use Date as part of query in order to return relevant results (Breakfast, Lunch, Dinner)
     func fetchMeals(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
-        getTime()
-        let urlString = "https://api.spoonacular.com/recipes/complexSearch?apiKey=20e7627a1f524111abcd0589ce45265e&number=10&addRecipeNutrition=true"
+        let currHour = getCalendarHour()
+//      let urlString = "http://127.0.0.1:5000/recommendations/?hour=" + String(currHour) // run backend locally and test with this
+        let urlString = "https://recommendations-backend-dev.herokuapp.com/recommendations/?hour=" + String(currHour) // connected to official heroku app for Snack Habbits
         fetch(urlString: urlString, completion: completion)
     }
     
@@ -29,7 +30,6 @@ class APIService {
             }
             
             guard let data = data else { return }
-            
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
                 completion(decodedData, nil)
@@ -40,11 +40,11 @@ class APIService {
             }.resume() //END URLSession
     }
     
-    private func getTime() {
+    private func getCalendarHour() -> Int {
         let date = Date()
         let calendar = Calendar.current
         let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        print("Time: \(hour):\(minutes)")
+        print("Time: \(hour)")
+        return hour
     }
 }

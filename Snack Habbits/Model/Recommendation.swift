@@ -16,18 +16,22 @@ struct SearchResult: Decodable {
 
 struct Result: Decodable {
     
-    let id:             Int
-    let image:          String
-    let title:          String
-    let nutrition:      Nutrition
-    let vegetarian:     Bool
-    let vegan:          Bool
-    let glutenFree:     Bool
-    let dairyFree:      Bool
-    let sustainable:    Bool
-    let cheap:          Bool
-    let veryHealthy:    Bool
-    let aggregateLikes: Int
+    let id:                 Int?
+    let image:              String
+    let title:              String
+    let nutrition:          Nutrition
+    let vegetarian:         Bool
+    let vegan:              Bool
+    let glutenFree:         Bool
+    let dairyFree:          Bool
+    let sustainable:        Bool
+    let cheap:              Bool
+    let veryHealthy:        Bool
+    let aggregateLikes:     Int
+    let cuisines:           [String]
+    let dishTypes:          [String]
+    let diets:              [String]
+    
 }
 
 struct Nutrition: Decodable {

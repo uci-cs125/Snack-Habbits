@@ -140,7 +140,7 @@ class SettingsTableViewController: UITableViewController {
             self.navigationController?.popViewController(animated: true)
             self.delegate?.didSaveSettings(user: self.user)
         }
-        
+        print("Saved settings:", docData)
         
     }
     
