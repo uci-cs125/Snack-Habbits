@@ -178,6 +178,7 @@ class RegistrationViewController: UIViewController {
                 self.registeringHUD.show(in: self.view)
             } else {
                 self.registeringHUD.dismiss()
+                self.handleGoToLogin()
             }
         }
     }
@@ -192,6 +193,7 @@ class RegistrationViewController: UIViewController {
                 self?.showHUDWithError(error: error)
                 return
             }
+            
             
         }
         
