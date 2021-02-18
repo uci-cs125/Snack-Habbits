@@ -38,7 +38,9 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
     }
     
     fileprivate func fetchRecipes() {
-        APIService.shared.fetchMeals(searchTerm: "random") { (results, error) in
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        print("UID:", uid)
+        APIService.shared.fetchMeals(uid: uid) { (results, error) in
             
             if let error = error {
                 print("Failed to fetch recipes", error)

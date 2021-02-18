@@ -15,8 +15,7 @@ struct SearchResult: Decodable {
 
 
 struct Result: Decodable {
-    
-    let id:                 Int?
+    let id:                 Int32
     let image:              String
     let title:              String
     let nutrition:          Nutrition
@@ -27,11 +26,11 @@ struct Result: Decodable {
     let sustainable:        Bool
     let cheap:              Bool
     let veryHealthy:        Bool
-    let aggregateLikes:     Int
+    let aggregateLikes:     Int32
     let cuisines:           [String]
     let dishTypes:          [String]
     let diets:              [String]
-    
+    let similarityScore:    Float
 }
 
 struct Nutrition: Decodable {

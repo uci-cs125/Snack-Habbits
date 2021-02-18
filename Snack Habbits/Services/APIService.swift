@@ -11,13 +11,13 @@ import Foundation
 class APIService {
     static let shared = APIService()
     // TODO:- Use Date as part of query in order to return relevant results (Breakfast, Lunch, Dinner)
-    func fetchMeals(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
+    func fetchMeals(uid: String, completion: @escaping (SearchResult?, Error?) -> ()) {
         let currHour = getCalendarHour()
-//      let urlString = "http://127.0.0.1:5000/recommendations/?hour=" + String(currHour) // run backend locally and test with this
-        let urlString = "https://recommendations-backend-dev.herokuapp.com/recommendations/?hour=" + String(currHour) // connected to official heroku app for Snack Habbits
+        print("UID:", uid)
+        let urlString = "http://127.0.0.1:5000/recipes/?uid=" + uid + "&hour=" + String(currHour)
+        print(urlString)
         fetch(urlString: urlString, completion: completion)
     }
-    
     
     func fetch<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         guard let url = URL(string: urlString) else { return }
@@ -28,12 +28,12 @@ class APIService {
                 completion(nil, error)
                 return
             }
-            
             guard let data = data else { return }
+            
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
                 completion(decodedData, nil)
-            } catch let jsonErr{
+            } catch let jsonErr {
                 print("Failed to decode json: ", jsonErr)
                 completion(nil, jsonErr)
             }
