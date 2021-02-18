@@ -8,7 +8,8 @@
 
 import Foundation
 
-struct Meal {
+
+struct Meal: Codable {
     var name:       String?
     var calories:   Float?
     var fat:        Float?

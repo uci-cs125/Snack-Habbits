@@ -116,7 +116,7 @@ class SettingsTableViewController: UITableViewController {
         user.age = Int(ageTextField.text!)
  
         let docData: [String: Any] = [
-            "uid": "123945654",
+            "uid": uid,
             "fullName": user.name,
             "age": user.age,
             "weight": user.weight,

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class TodaysMealsTableViewController: UITableViewController {
 
     var meals = [Meal]() {
@@ -16,11 +16,49 @@ class TodaysMealsTableViewController: UITableViewController {
         }
     }
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchUserMeals()
         tableView.tableFooterView = UIView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    //MARK:- Firestore
+    private func fetchUserMeals(){
+        let date = self.getDate()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        Firestore.firestore().collection("meals").document(uid).getDocument { (documentSnapshot, error) in
+            if let error = error {
+                print("****Error fetching users meals:", error)
+                return
+            }
+            
+            guard let dictionary = documentSnapshot?.data() else { return }
+            let mealDict = dictionary[date]! as! [Any]
 
+            for meal in mealDict {
+                if let data = try? JSONSerialization.data(withJSONObject: meal, options: []){
+                    if let parsedMeal = try? JSONDecoder().decode(Meal.self, from: data) {
+                        self.meals.append(parsedMeal)
+                    }
+                    
+                }
+                    
+            }
+            
+            DispatchQueue.main.async {
+                self.tableView?.reloadData()
+            }
+//            let meals = UserDailyMeals(meals: mealDict)
+                
+        }
+
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,13 +89,51 @@ class TodaysMealsTableViewController: UITableViewController {
             break;
         }
     }
+    
+    //MARK:- Firestore
+    private func saveMealToFirestore() {
+
+        var mealItems = [Any]()
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        for meal in meals {
+            do {
+                let jsonData = try JSONEncoder().encode(meal)
+                let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: [])
+                mealItems.append(jsonObject)
+            }
+            catch{
+                print("Error encoding meal object")
+            }
+        }
+        let todayDate = getDate()
+        let docData: [String: Any] = [
+            "\(todayDate)": mealItems
+        ]
+
+        Firestore.firestore().collection("meals").document(uid).setData(docData, merge: true) { (error) in
+            if let error = error {
+                print("Error saving meals: ", error)
+                return
+            }
+            
+        }
+    }
+    
+    private func getDate() -> String {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        return format.string(from: date)
+        
+    }
 }
 
 extension TodaysMealsTableViewController: MealInputTableViewControllerDelegate {
     func didSave(meal: Meal) {
         meals.append(meal)
         tableView.reloadData()
-
+        saveMealToFirestore()
     }
     
 }

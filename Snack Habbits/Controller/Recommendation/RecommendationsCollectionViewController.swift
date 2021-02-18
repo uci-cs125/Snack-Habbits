@@ -41,13 +41,13 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
         APIService.shared.fetchMeals(searchTerm: "random") { (results, error) in
             
             if let error = error {
-                print("Failed to fetch apps in search page: ", error)
+                print("Failed to fetch recipes", error)
                 return
             }
             
             self.recommendationResults = results?.results ?? []
             DispatchQueue.main.async {
-                self.collectionView?.reloadData()
+                self.collectionView?.reloadData()            
             }
             
         }
