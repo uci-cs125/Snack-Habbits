@@ -192,13 +192,8 @@ class RegistrationViewController: UIViewController {
             if let error = error {
                 self?.showHUDWithError(error: error)
                 return
-            }
-            
-            
+            }                        
         }
-        
-
-        
         
     }
     

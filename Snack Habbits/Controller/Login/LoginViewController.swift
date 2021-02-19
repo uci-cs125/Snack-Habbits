@@ -66,15 +66,15 @@ class LoginViewController: UIViewController {
     
     @objc fileprivate func handleLogin() {
         loginViewModel.performLogin { (err) in
-            self.loginHUD.dismiss()
+            
             if let err = err {
-                print("Failed to log in:", err)
+                self.showHUDWithError(error: err)
                 return
             }
             
-            print("Logged in successfully")
             self.dismiss(animated: true, completion: {
                 self.delegate?.didFinishLoggingIn()
+                self.loginHUD.dismiss()
             })
         }
     }
@@ -110,6 +110,16 @@ class LoginViewController: UIViewController {
     
     fileprivate let loginViewModel = LoginViewModel()
     fileprivate let loginHUD = JGProgressHUD(style: .dark)
+    
+    //MARK:- HUD
+    private func showHUDWithError(error: Error) {
+        loginHUD.dismiss()
+        let hud = JGProgressHUD(style: .dark)
+        hud.textLabel.text = "Failed Registration"
+        hud.detailTextLabel.text = error.localizedDescription
+        hud.show(in: self.view)
+        hud.dismiss(afterDelay: 4)
+    }
     
     fileprivate func setupBindables() {
         loginViewModel.isFormValid.bind { [unowned self] (isFormValid) in
