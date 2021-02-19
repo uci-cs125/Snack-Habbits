@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 
 
 class RecommendationDetailCollectionViewController: UICollectionViewController {
@@ -53,8 +53,38 @@ class RecommendationDetailCollectionViewController: UICollectionViewController {
         return UICollectionViewCell()
     }
 
-    // MARK: UICollectionViewDelegate
 
+    //MARK:- API SERVICE
+
+    private func postMealRating() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let mock_recipe_id = "511223"
+        let url = URL(string: "http://localhost:5000/likes/")!
+        let postString = "user_id=\(uid)&recipe_id=\(mock_recipe_id)"
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = postString.data(using: String.Encoding.utf8)
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            guard let data = data,
+                  let response = response as? HTTPURLResponse,
+                  error == nil else {
+                    print("error", error ?? "Unknown error")
+                    return
+                    }
+            guard (200 ... 299) ~= response.statusCode else {
+                print("\(response.statusCode)")
+                print("\(response)")
+                return
+            }
+            let responseString = String(data: data, encoding: .utf8)
+            print("\(responseString)")
+        }
+            
+    }
+    // MARK: UICollectionViewDelegate
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
