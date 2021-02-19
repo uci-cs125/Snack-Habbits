@@ -15,6 +15,7 @@ class RecommendationDetailCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        postMealRating()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -58,31 +59,39 @@ class RecommendationDetailCollectionViewController: UICollectionViewController {
 
     private func postMealRating() {
         
+
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let mock_recipe_id = "511223"
+        let mock_recipe_id = Int(715544)
         let url = URL(string: "http://localhost:5000/likes/")!
-        let postString = "user_id=\(uid)&recipe_id=\(mock_recipe_id)"
+        let parameters: [String:Any] = [
+            "user_id" : "\(uid)",
+            "recipe_id": mock_recipe_id
+        ]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = postString.data(using: String.Encoding.utf8)
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let data = data,
-                  let response = response as? HTTPURLResponse,
-                  error == nil else {
-                    print("error", error ?? "Unknown error")
+        request.httpBody = httpBody
+
+        let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                guard let data = data,
+                      let response = response as? HTTPURLResponse,
+                      error == nil else {
+                            print("error", error ?? "Unknown error")
+                            return
+                }
+                guard (200 ... 299) ~= response.statusCode else {
+                    print("\(response.statusCode)")
+                    print("\(response)")
                     return
-                    }
-            guard (200 ... 299) ~= response.statusCode else {
-                print("\(response.statusCode)")
-                print("\(response)")
-                return
-            }
-            let responseString = String(data: data, encoding: .utf8)
-            print("\(responseString)")
-        }
-        task.resume()
+                }
+                let responseString = String(data: data, encoding: .utf8)
+                print("\(responseString)")
+            }.resume()
+     
     }
     // MARK: UICollectionViewDelegate
     /*

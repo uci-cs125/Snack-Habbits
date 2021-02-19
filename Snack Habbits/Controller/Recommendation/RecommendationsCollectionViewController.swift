@@ -22,8 +22,9 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        fetchRecipes() // END APIService
+        fetchRecipes()
         fetchCurrentUser()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,13 +37,15 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
             present(navController, animated: true)
         } else {
             print("Logged in user: \(Auth.auth().currentUser?.uid)")
+            postMealRating()
         }
     }
     
     fileprivate func fetchRecipes() {
+        print("Hitting API endpoint")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         APIService.shared.fetchMeals(uid: uid) { (results, error) in
-            
+            print("Fetching results")
             if let error = error {
                 print("Failed to fetch recipes", error)
                 return
@@ -68,6 +71,43 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
             self.user = User(dictionary: dictionary)
         }
 
+    }
+    
+    private func postMealRating() {
+        
+
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let mock_recipe_id = Int(715544)
+        let url = URL(string: "http://localhost:5000/likes/")!
+        let parameters: [String:Any] = [
+            "user_id" : "\(uid)",
+            "recipe_id": mock_recipe_id
+        ]
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = httpBody
+
+        let session = URLSession.shared
+            session.dataTask(with: request) { (data, response, error) in
+                guard let data = data,
+                      let response = response as? HTTPURLResponse,
+                      error == nil else {
+                            print("error", error ?? "Unknown error")
+                            return
+                }
+                guard (200 ... 299) ~= response.statusCode else {
+                    print("\(response.statusCode)")
+                    print("\(response)")
+                    return
+                }
+                let responseString = String(data: data, encoding: .utf8)
+                print("\(responseString)")
+            }.resume()
+     
     }
     
     // MARK: UICollectionViewDataSource
