@@ -26,7 +26,7 @@ class RecommendationCollectionViewCell: UICollectionViewCell {
         imageView.sd_setImage(with: url)
         imageView.layer.cornerRadius = 12
         imageView.clipsToBounds = true
-        
+        print("Found result with similarity score: \(result.similarityScore)")
         ratingLabel.text = "\(result.aggregateLikes) Likes"
         
         calorieLabel.text = "\(result.nutrition.nutrients[0].amount) \(result.nutrition.nutrients[0].unit) per serving"
