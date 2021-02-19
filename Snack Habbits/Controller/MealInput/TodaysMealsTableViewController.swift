@@ -38,7 +38,12 @@ class TodaysMealsTableViewController: UITableViewController {
             }
             
             guard let dictionary = documentSnapshot?.data() else { return }
+            
+            // Make sure meals actually exists for the date
+            guard let _ = dictionary[date] else { return }
             let mealDict = dictionary[date]! as! [Any]
+                
+            
 
             for meal in mealDict {
                 if let data = try? JSONSerialization.data(withJSONObject: meal, options: []){
@@ -53,7 +58,6 @@ class TodaysMealsTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView?.reloadData()
             }
-//            let meals = UserDailyMeals(meals: mealDict)
                 
         }
 
