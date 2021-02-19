@@ -82,7 +82,7 @@ class RecommendationDetailCollectionViewController: UICollectionViewController {
             let responseString = String(data: data, encoding: .utf8)
             print("\(responseString)")
         }
-            
+        task.resume()
     }
     // MARK: UICollectionViewDelegate
     /*
