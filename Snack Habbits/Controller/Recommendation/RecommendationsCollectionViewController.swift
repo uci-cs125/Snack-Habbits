@@ -34,12 +34,13 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
             let navController = UINavigationController(rootViewController: loginController)
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
+        } else {
+            print("Logged in user: \(Auth.auth().currentUser?.uid)")
         }
     }
     
     fileprivate func fetchRecipes() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        print("UID:", uid)
         APIService.shared.fetchMeals(uid: uid) { (results, error) in
             
             if let error = error {
@@ -120,7 +121,6 @@ extension RecommendationsCollectionViewController: UICollectionViewDelegateFlowL
 extension RecommendationsCollectionViewController: SettingsControllerDelegate {
     func didSaveSettings(user: User?) {
         self.user = user
-        print("New name \(user?.name ?? "")")
     }
         
 }
