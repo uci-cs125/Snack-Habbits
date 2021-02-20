@@ -30,7 +30,8 @@ struct Result: Decodable {
     let cuisines:           [String]
     let dishTypes:          [String]
     let diets:              [String]
-    let similarityScore:    Float
+    let nutritionScore:     Float
+    let tasteScore:         Float
 }
 
 struct Nutrition: Decodable {
