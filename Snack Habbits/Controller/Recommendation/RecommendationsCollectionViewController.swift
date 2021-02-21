@@ -10,21 +10,20 @@ import UIKit
 import Firebase
 //private let reuseIdentifier = "RecommendationCell"
 
-class RecommendationsCollectionViewController: UICollectionViewController, LoginControllerDelegate {
-    func didFinishLoggingIn() {
-        fetchCurrentUser()
-    }
-    
+
+class RecommendationsCollectionViewController: UICollectionViewController {
+
+    //MARK:- Properties
     private var recommendationResults = [Result]()
     private var user: User?
     
 
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         fetchRecipes()
         fetchCurrentUser()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -36,11 +35,11 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
         } else {
-            print("Logged in user: \(Auth.auth().currentUser?.uid)")
-            postMealRating()
+            fetchRecipes()
         }
     }
     
+    //MARK:- API Service
     fileprivate func fetchRecipes() {
         print("Hitting API endpoint")
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -73,45 +72,8 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
 
     }
     
-    private func postMealRating() {
-        
-
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let mock_recipe_id = Int(715544)
-        let url = URL(string: "http://localhost:5000/likes/")!
-        let parameters: [String:Any] = [
-            "user_id" : "\(uid)",
-            "recipe_id": mock_recipe_id
-        ]
-        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = httpBody
-
-        let session = URLSession.shared
-            session.dataTask(with: request) { (data, response, error) in
-                guard let data = data,
-                      let response = response as? HTTPURLResponse,
-                      error == nil else {
-                            print("error", error ?? "Unknown error")
-                            return
-                }
-                guard (200 ... 299) ~= response.statusCode else {
-                    print("\(response.statusCode)")
-                    print("\(response)")
-                    return
-                }
-                let responseString = String(data: data, encoding: .utf8)
-                print("\(responseString)")
-            }.resume()
-     
-    }
     
     // MARK: UICollectionViewDataSource
-
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -129,14 +91,20 @@ class RecommendationsCollectionViewController: UICollectionViewController, Login
             customCell.configure(with: recommendationResults[indexPath.row])
             cell = customCell
         }
-                
-        
-        // Configure the cell
     
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedRecipe = recommendationResults[indexPath.item]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "DetailsViewController") as! RecommendationDetailViewController
+        vc.recommendedRecipe = selectedRecipe
+        navigationController?.pushViewController(vc, animated: true)
+        // TODO: set delegate to observe if user adds food from details or likes / dislikes 
+    }
+    
+    // MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "SelectSettings":
@@ -163,4 +131,10 @@ extension RecommendationsCollectionViewController: SettingsControllerDelegate {
         self.user = user
     }
         
+}
+
+extension RecommendationsCollectionViewController: LoginControllerDelegate {
+    func didFinishLoggingIn() {
+        fetchCurrentUser()
+    }
 }

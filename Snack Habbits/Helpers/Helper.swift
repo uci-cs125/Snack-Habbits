@@ -18,4 +18,16 @@ class Helper {
         
         return button
     }
+    
+    static func getDate() -> String {
+        let date = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd"
+        return format.string(from: date)
+    }
+    
+    static func roundFloat(num: Float) -> Float {
+
+        return Float(String(format: "%.2f", num))!
+    }
 }

@@ -13,7 +13,6 @@ protocol MealInputTableViewControllerDelegate {
 }
 
 
-
 class MealInputTableViewController: UITableViewController {
 
     var meal:  Meal? {
