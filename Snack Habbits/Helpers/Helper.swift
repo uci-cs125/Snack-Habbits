@@ -26,6 +26,13 @@ class Helper {
         return format.string(from: date)
     }
     
+    static func getCalendarHour() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: date)
+        return hour
+    }
+    
     static func roundFloat(num: Float) -> Float {
 
         return Float(String(format: "%.2f", num))!

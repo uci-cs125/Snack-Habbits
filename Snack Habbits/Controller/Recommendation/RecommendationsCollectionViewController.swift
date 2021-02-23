@@ -17,14 +17,23 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     private var recommendationResults = [Result]()
     private var user: User?
     private var meals = [Meal]()
-
+    let dispatchQueue = DispatchQueue(label: "myQueue", qos: .background)
+    let semaphore = DispatchSemaphore(value: 0)
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
+        aiv.color = .black
+        aiv.startAnimating()
+        aiv.hidesWhenStopped = true
+        return aiv
+    }()
+    
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupActivityIndicator()
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        fetchUserMeals()
-        fetchCurrentUser()
-       // fetchRecipes()
+        fetchRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,41 +49,66 @@ class RecommendationsCollectionViewController: UICollectionViewController {
         }
     }
     
-    @IBAction func fetchResultsTapped(_ sender: Any) {
-        fetchRecommendations()
+    //MARK:- Setup
+    private func setupActivityIndicator() {
+        view.addSubview(activityIndicatorView)
+        activityIndicatorView.fillSuperview()
     }
     
     //MARK:- API Service
     fileprivate func fetchRecipes() {
         
-
-        
+        let date = Helper.getDate()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
+        dispatchQueue.async {
+            self.fetchCurrentUser(with: uid)
+            self.semaphore.wait()
+            self.fetchUserMeals(with: uid)
+            self.semaphore.wait()
+            self.fetchRecommendations()
+        }
 
-        Firestore.firestore().collection("users").document(uid).getDocument { (documentSnapshot, error) in
+    }
     
+
+    
+    //MARK:- Firestore
+    private func fetchCurrentUser(with uid: String){
+        Firestore.firestore().collection("users").document(uid).getDocument { (documentSnapshot, error) in
             if let error = error {
-                print("****Error fetching current User:", error)
+                self.semaphore.signal()
+                print("Error fetching current User:", error)
                 return
             }
-            guard let dictionary = documentSnapshot?.data() else { return }
+            
+            guard let dictionary = documentSnapshot?.data() else {
+                self.semaphore.signal()
+                return
+            }
+            
             self.user = User(dictionary: dictionary)
+            self.semaphore.signal()
         } // END Get User
-        
-        
-        
-        let date = Helper.getDate()
 
+    }
+    
+    private func fetchUserMeals(with uid: String){
+        let date = Helper.getDate()
         Firestore.firestore().collection("meals").document(uid).getDocument { (documentSnapshot, error) in
-      
+            print("Fetching meals")
+            
             if let error = error {
+                self.semaphore.signal()
                 print("****Error fetching users meals:", error)
                 return
             }
             
-            guard let dictionary = documentSnapshot?.data() else { return }
-            
+            guard let dictionary = documentSnapshot?.data() else {
+                self.semaphore.signal()
+                return
+                
+            }
             // Make sure meals actually exists for the date
             guard let _ = dictionary[date] else { return }
             let mealDict = dictionary[date]! as! [Any]
@@ -87,32 +121,17 @@ class RecommendationsCollectionViewController: UICollectionViewController {
                 }
                     
             }
-
+            self.semaphore.signal()
  
         } // END get Meals
-        
-
     }
     
     func fetchRecommendations() {
-        var context = Context(meals: self.meals, caloriesBurned: 1000.0, currHour: 12)
+        var context = Context(meals: self.meals, caloriesBurned: 1000.0, currHour: Helper.getCalendarHour())
         guard let currentUser = user else { return }
-        print("\n\n\n\n********************************  \(currentUser.gender)")
         var recipeRequest = RecipeRequestBody(user: currentUser, context: context)
         
-//        do {
-//            let encoder = JSONEncoder()
-//            let httpBody = try encoder.encode(recipeRequest)
-//            if let JSONString = String(data: httpBody, encoding: String.Encoding.utf8) {
-//               print(JSONString)
-//            }
-//        } catch {
-//            print("Error serializing JSON \(error.localizedDescription)")
-//        }
-        
-        
         APIService.shared.fetchMeals(recipeRequestBody: recipeRequest) { (results, error) in
-            print("Fetching results")
             if let error = error {
                 print("Failed to fetch recipes", error)
                 return
@@ -120,52 +139,14 @@ class RecommendationsCollectionViewController: UICollectionViewController {
 
             self.recommendationResults = results?.results ?? []
             DispatchQueue.main.async {
+                self.activityIndicatorView.stopAnimating()
                 self.collectionView?.reloadData()
             }
 
         } // END get Recipes
     }
     
-    //MARK:- Firestore
-    private func fetchCurrentUser(){
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("users").document(uid).getDocument { (documentSnapshot, error) in
-            if let error = error {
-                print("****Error fetching current User:", error)
-                return
-            }
-            guard let dictionary = documentSnapshot?.data() else { return }
-            self.user = User(dictionary: dictionary)
-        }
-
-    }
     
-    private func fetchUserMeals(){
-        let date = Helper.getDate()
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("meals").document(uid).getDocument { (documentSnapshot, error) in
-            if let error = error {
-                print("****Error fetching users meals:", error)
-                return
-            }
-
-            guard let dictionary = documentSnapshot?.data() else { return }
-
-            // Make sure meals actually exists for the date
-            guard let _ = dictionary[date] else { return }
-            let mealDict = dictionary[date]! as! [Any]
-
-            for meal in mealDict {
-                if let data = try? JSONSerialization.data(withJSONObject: meal, options: []){
-                    if let parsedMeal = try? JSONDecoder().decode(Meal.self, from: data) {
-                        self.meals.append(parsedMeal)
-                    }
-                }
-
-            }
-
-        }
-    }
     
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -229,6 +210,8 @@ extension RecommendationsCollectionViewController: SettingsControllerDelegate {
 
 extension RecommendationsCollectionViewController: LoginControllerDelegate {
     func didFinishLoggingIn() {
-        fetchCurrentUser()
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        fetchCurrentUser(with: uid)
+        fetchUserMeals(with: uid)
     }
 }

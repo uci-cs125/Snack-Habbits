@@ -107,13 +107,7 @@ class APIService {
 
     
 
-    private func getCalendarHour() -> Int {
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        print("Time: \(hour)")
-        return hour
-    }
+
     
     
 

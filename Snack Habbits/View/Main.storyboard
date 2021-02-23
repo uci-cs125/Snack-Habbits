@@ -550,11 +550,6 @@
                                 <segue destination="s2l-mv-fNy" kind="show" identifier="SelectSettings" id="YHJ-RH-KaA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="LgW-Gz-DZG">
-                            <connections>
-                                <action selector="fetchResultsTapped:" destination="FU3-Hl-5VQ" id="grh-on-Urv"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fdf-Tt-dfn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
