@@ -37,6 +37,7 @@
 		F089476E25B63B4400A888B1 /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089476D25B63B4400A888B1 /* Bindable.swift */; };
 		F089477F25B6532A00A888B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089477E25B6532A00A888B1 /* User.swift */; };
 		F0C3B66225E1D88000E26C78 /* RecommendationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C3B66125E1D88000E26C78 /* RecommendationDetailViewController.swift */; };
+		F0C3B6A425E4A2CD00E26C78 /* RecipeRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C3B6A325E4A2CC00E26C78 /* RecipeRequestBody.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		F089476D25B63B4400A888B1 /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		F089477E25B6532A00A888B1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F0C3B66125E1D88000E26C78 /* RecommendationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationDetailViewController.swift; sourceTree = "<group>"; };
+		F0C3B6A325E4A2CC00E26C78 /* RecipeRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRequestBody.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				F089477E25B6532A00A888B1 /* User.swift */,
 				F058D0D125C5F72C00325DF1 /* Recommendation.swift */,
 				F01D60BD25DB701500462E4D /* Meal.swift */,
+				F0C3B6A325E4A2CC00E26C78 /* RecipeRequestBody.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 				F058D0D225C5F72C00325DF1 /* Recommendation.swift in Sources */,
 				F01D60BE25DB701500462E4D /* Meal.swift in Sources */,
 				F089476E25B63B4400A888B1 /* Bindable.swift in Sources */,
+				F0C3B6A425E4A2CD00E26C78 /* RecipeRequestBody.swift in Sources */,
 				F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */,
 				F089477F25B6532A00A888B1 /* User.swift in Sources */,
 				F01D609825D9CE1000462E4D /* RecommendationCollectionViewCell.swift in Sources */,

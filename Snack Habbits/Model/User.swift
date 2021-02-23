@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-struct User {
+struct User: Codable {
     var uid:            String?
     var name:           String?
     var age:            Int?
@@ -19,7 +19,7 @@ struct User {
     var weight:         Float?
     var weeklyTarget:   String?
     var activityLevel:  String?
-    
+    var gender:         String?
     init(dictionary: [String: Any]) {
         // Initialize user
         self.uid            = dictionary["uid"]             as? String ?? ""
@@ -30,6 +30,7 @@ struct User {
         self.weight         = dictionary["weight"]          as? Float
         self.weeklyTarget   = dictionary["weeklyTarget"]    as? String ?? ""
         self.activityLevel  = dictionary["activityLevel"]   as? String ?? ""
+        self.gender         = dictionary["gender"]          as? String ?? ""
     }
     
 }

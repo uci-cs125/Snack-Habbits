@@ -20,7 +20,7 @@ class SettingsTableViewController: UITableViewController {
     // Height Picker Data Source
     let feetPickerData = Array(3...9)
     let inchPickerData = Array(0...11)
-    let heightPickerCellIndexPath = IndexPath(row: 2, section: 0)
+    let heightPickerCellIndexPath = IndexPath(row: 3, section: 0)
     var isHeightPickerShown: Bool = false {
         didSet{
             heightPickerView.isHidden = !isHeightPickerShown
@@ -35,6 +35,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var heightPickerView: UIPickerView!
 
+    @IBOutlet weak var genderSwitch: UISwitch!
     @IBOutlet weak var activityLevelLabel: UILabel!
     @IBOutlet weak var currentWeightTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -69,6 +70,7 @@ class SettingsTableViewController: UITableViewController {
         if let weeklyTarget = user?.weeklyTarget {
             weeklyTargetLabel.text = weeklyTarget
         }
+
 
     }
 

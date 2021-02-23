@@ -27,11 +27,11 @@ struct Result: Decodable {
     let cheap:              Bool
     let veryHealthy:        Bool
     let aggregateLikes:     Int32
-//    let cuisines:           [String]
-//    let dishTypes:          [String]
-//    let diets:              [String]
-//    let nutritionScore:     Float
-//    let tasteScore:         Float
+    let cuisines:           [String]
+    let dishTypes:          [String]
+    let diets:              [String]
+    let nutritionalScore:   Float
+    let tasteScore:         Float
 }
 
 struct Nutrition: Decodable {
