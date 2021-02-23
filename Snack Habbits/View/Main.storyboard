@@ -97,9 +97,19 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E9R-39-thr">
-                                                            <rect key="frame" x="325" y="6.5" width="51" height="31"/>
-                                                        </switch>
+                                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ioG-6U-5YG">
+                                                            <rect key="frame" x="214" y="6.5" width="160" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="160" id="LGp-Fd-9SY"/>
+                                                            </constraints>
+                                                            <segments>
+                                                                <segment title="Male"/>
+                                                                <segment title="Female"/>
+                                                            </segments>
+                                                            <connections>
+                                                                <action selector="genderTapped:" destination="s2l-mv-fNy" eventType="valueChanged" id="qf7-mI-JoA"/>
+                                                            </connections>
+                                                        </segmentedControl>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="r5M-qi-Fcj" firstAttribute="leading" secondItem="dZN-a9-TZG" secondAttribute="leading" id="2zZ-8f-WXp"/>
@@ -402,7 +412,7 @@
                         <outlet property="activityLevelLabel" destination="ir6-4v-Wry" id="ekh-po-YOe"/>
                         <outlet property="ageTextField" destination="FRt-lQ-dmC" id="8sy-ge-qox"/>
                         <outlet property="currentWeightTextField" destination="HPU-19-jNP" id="GIh-IG-nIh"/>
-                        <outlet property="genderSwitch" destination="E9R-39-thr" id="NAf-jW-hrW"/>
+                        <outlet property="genderSwitch" destination="ioG-6U-5YG" id="Wsc-Em-Y9a"/>
                         <outlet property="heightLabel" destination="4ky-fh-s7t" id="X4b-D2-YE4"/>
                         <outlet property="heightPickerView" destination="eKQ-2z-Fyx" id="JXv-Fd-b3i"/>
                         <outlet property="nameTextField" destination="eM2-6t-mK2" id="VXw-fk-leP"/>

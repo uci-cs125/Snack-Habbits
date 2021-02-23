@@ -35,7 +35,8 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var heightPickerView: UIPickerView!
 
-    @IBOutlet weak var genderSwitch: UISwitch!
+
+    @IBOutlet weak var genderSwitch: UISegmentedControl!
     @IBOutlet weak var activityLevelLabel: UILabel!
     @IBOutlet weak var currentWeightTextField: UITextField!
     @IBOutlet weak var ageTextField: UITextField!
@@ -71,6 +72,13 @@ class SettingsTableViewController: UITableViewController {
             weeklyTargetLabel.text = weeklyTarget
         }
 
+        if let gender = user?.gender {
+            if gender == "male"{
+                genderSwitch.selectedSegmentIndex = 0
+            } else {
+                genderSwitch.selectedSegmentIndex = 1
+            }
+        }
 
     }
 
@@ -101,10 +109,26 @@ class SettingsTableViewController: UITableViewController {
             weeklyTargetLabel.text = weeklyTarget
         }
         
+        if let gender = user.gender {
+            if gender == "male"{
+                genderSwitch.selectedSegmentIndex = 0
+            } else {
+                genderSwitch.selectedSegmentIndex = 1
+            }
+        }
+        
         
     }
     @IBAction func cancelButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func genderTapped(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            user?.gender = "male"
+        } else {
+            user?.gender = "female"
+        }
     }
     
     //MARK:- Actions
@@ -125,7 +149,8 @@ class SettingsTableViewController: UITableViewController {
             "heightFeet": user.heightFeet,
             "heightInches": user.heightInches,
             "weeklyTarget": user.weeklyTarget,
-            "activityLevel": user.activityLevel
+            "activityLevel": user.activityLevel,
+            "gender": user.gender
         ]
 
         let hud = JGProgressHUD(style: .dark)

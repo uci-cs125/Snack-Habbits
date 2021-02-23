@@ -140,7 +140,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
             self.recommendationResults = results?.results ?? []
             DispatchQueue.main.async {
                 self.activityIndicatorView.stopAnimating()
-                self.collectionView?.reloadData()
+                self.collectionView?.reloadData() 
             }
 
         } // END get Recipes
