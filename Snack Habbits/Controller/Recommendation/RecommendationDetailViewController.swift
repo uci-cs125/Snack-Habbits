@@ -10,10 +10,16 @@ import UIKit
 import SDWebImage
 import Firebase
 
+
+protocol RecommendationDetailViewControllerDelegate {
+    func didAdd(meal: Meal)
+}
+
 class RecommendationDetailViewController: UIViewController {
 
     var recommendedRecipe: Result?
     var meals = [Meal]()
+    var delegate: RecommendationDetailViewControllerDelegate?
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var recipeImage: UIImageView!
@@ -30,7 +36,8 @@ class RecommendationDetailViewController: UIViewController {
     @IBOutlet weak var fiberLabel: UILabel!
     @IBOutlet weak var sugarLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var proteinDaily: UIStackView!
+
+    @IBOutlet weak var proteinDailyLabel: UILabel!
     
 
     
@@ -47,6 +54,7 @@ class RecommendationDetailViewController: UIViewController {
         let loveAction = UIAlertAction(title: "Loved the meal", style: .default, handler: { action in
             self.postMealRating()
             self.saveMealToFirestore()
+   
         })
         
         let dislikeAction = UIAlertAction(title: "Wasn't my favorite", style: .default, handler: {action in
@@ -72,34 +80,30 @@ class RecommendationDetailViewController: UIViewController {
     private func setupUI(){
 
         guard let recipe = recommendedRecipe else { return }
+        
         recipeImage.layer.cornerRadius = 12
         recipeImage.layer.masksToBounds = true
+        
         titleLabel.text = recipe.title
+        
         let imageUrl = URL(string: recipe.image)
         recipeImage.sd_setImage(with:imageUrl)
-        guard let recommendedRecipe = recommendedRecipe else { return }
-        for nutrient in recommendedRecipe.nutrition.nutrients {
-            switch nutrient.name {
-            case "Calories":
-                calorieLabel.text = "\(nutrient.amount) CALORIES PER SERVING)"
-            case "Fat":
-                fatLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Saturdated Fat":
-                saturatedFatLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Carbohydrates":
-                carbLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Cholesterol":
-                cholesterolLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Sodium":
-                sodiumLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Sugar":
-                sugarLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            case "Protein":
-                proteinLabel.text = "\(nutrient.amount) \(nutrient.unit)"
-            default:
-                break
-            }
-        }
+        calorieLabel.text = "\(recipe.calories.amount) \(recipe.calories.unit) per serving"
+        fatLabel.text = "\(recipe.fat.amount) \(recipe.fat.unit)"
+        fatDaily.text = "\(recipe.fat.percentOfDailyNeeds) %"
+        saturatedFatLabel.text = "\(recipe.saturatedFat.amount) \(recipe.saturatedFat.unit)"
+        cholesterolLabel.text = "\(recipe.cholesterol.amount) \(recipe.cholesterol.unit)"
+        cholesterolDaily.text = "\(recipe.cholesterol.percentOfDailyNeeds) %"
+        sodiumLabel.text = "\(recipe.sodium.amount) \(recipe.sodium.unit)"
+        sodiumDaily.text = "\(recipe.sodium.percentOfDailyNeeds) %"
+        carbLabel.text = "\(recipe.carbohydrates.amount) \(recipe.carbohydrates.unit)"
+        carbDaily.text = "\(recipe.carbohydrates.percentOfDailyNeeds) %"
+        fiberLabel.text = "\(recipe.fiber.amount) \(recipe.fiber.unit)"
+        sugarLabel.text = "\(recipe.sugar.amount) \(recipe.sugar.unit)"
+        proteinLabel.text = "\(recipe.protein.amount) \(recipe.protein.unit)"
+        proteinDailyLabel.text = "\(recipe.protein.percentOfDailyNeeds) %"
+
+        
     }
     
     
@@ -109,26 +113,17 @@ class RecommendationDetailViewController: UIViewController {
         var mealItems = [Any]()
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let recipe = recommendedRecipe else { return }
         var meal = Meal()
-        meal.name = recommendedRecipe?.title
+        meal.name = recipe.title
+        meal.calories = Float(recipe.calories.amount)
+        meal.fat = Float(recipe.fat.amount)
+        meal.carbs = Float(recipe.carbohydrates.amount)
+        meal.protein = Float(recipe.protein.amount)
         
-        if let calories = recommendedRecipe?.nutrition.nutrients[0].amount {
-            meal.calories = Helper.roundFloat(num: Float(calories))
-        }
-
-        if let fat = recommendedRecipe?.nutrition.nutrients[1].amount {
-            meal.fat = Helper.roundFloat(num: Float(fat))
-        }
-
-        if let carbs = recommendedRecipe?.nutrition.nutrients[2].amount {
-            meal.carbs = Helper.roundFloat(num: Float(carbs))
-        }
-
-        if let protein = recommendedRecipe?.nutrition.nutrients[3].amount {
-            meal.protein = Helper.roundFloat(num: Float(protein))
-        }
+        
         self.meals.append(meal)
-      
+        delegate?.didAdd(meal: meal)
 
         for meal in meals {
             do {

@@ -38,6 +38,8 @@
 		F089477F25B6532A00A888B1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089477E25B6532A00A888B1 /* User.swift */; };
 		F0C3B66225E1D88000E26C78 /* RecommendationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C3B66125E1D88000E26C78 /* RecommendationDetailViewController.swift */; };
 		F0C3B6A425E4A2CD00E26C78 /* RecipeRequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C3B6A325E4A2CC00E26C78 /* RecipeRequestBody.swift */; };
+		F0D1E44925E706E600A9EF55 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F0D1E44825E706E600A9EF55 /* HealthKit.framework */; };
+		F0D1E44C25E7086600A9EF55 /* HealthKitSetupAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D1E44B25E7086600A9EF55 /* HealthKitSetupAssist.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +78,9 @@
 		F089477E25B6532A00A888B1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F0C3B66125E1D88000E26C78 /* RecommendationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationDetailViewController.swift; sourceTree = "<group>"; };
 		F0C3B6A325E4A2CC00E26C78 /* RecipeRequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeRequestBody.swift; sourceTree = "<group>"; };
+		F0D1E44725E706E500A9EF55 /* Snack Habbits.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Snack Habbits.entitlements"; sourceTree = "<group>"; };
+		F0D1E44825E706E600A9EF55 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		F0D1E44B25E7086600A9EF55 /* HealthKitSetupAssist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSetupAssist.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D386D66A214F48CC4B99961 /* Pods_Snack_Habbits.framework in Frameworks */,
+				F0D1E44925E706E600A9EF55 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +108,7 @@
 		E7708116373B66C378E000DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F0D1E44825E706E600A9EF55 /* HealthKit.framework */,
 				5747CE7E50820EF9596CA04A /* Pods_Snack_Habbits.framework */,
 			);
 			name = Frameworks;
@@ -128,6 +135,7 @@
 		F01C895825B4BAE900D54CFD /* Snack Habbits */ = {
 			isa = PBXGroup;
 			children = (
+				F0D1E44725E706E500A9EF55 /* Snack Habbits.entitlements */,
 				F089474E25B62C5B00A888B1 /* GoogleService-Info.plist */,
 				F01C897425B4BEFF00D54CFD /* App Delegate */,
 				F01C896D25B4BEC600D54CFD /* Model */,
@@ -284,6 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				F058D0D525C5FAEE00325DF1 /* APIService.swift */,
+				F0D1E44B25E7086600A9EF55 /* HealthKitSetupAssist.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -455,6 +464,7 @@
 				F01D607D25D9B28D00462E4D /* SettingsTableViewController.swift in Sources */,
 				F058D0D625C5FAEE00325DF1 /* APIService.swift in Sources */,
 				F089473025B6167D00A888B1 /* RegistrationViewModel.swift in Sources */,
+				F0D1E44C25E7086600A9EF55 /* HealthKitSetupAssist.swift in Sources */,
 				F058B27F25B694FC002E02F5 /* LoginViewModel.swift in Sources */,
 				F058D0C625C5F33400325DF1 /* BaseCollectionCollectionViewController.swift in Sources */,
 				F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */,
@@ -611,6 +621,7 @@
 			baseConfigurationReference = 3731E7B46040F7A3A3149645 /* Pods-Snack Habbits.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Snack Habbits/Snack Habbits.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V3KUBC4QCP;
 				INFOPLIST_FILE = "$(SRCROOT)/Snack Habbits/Support Files/Info.plist";
@@ -630,6 +641,7 @@
 			baseConfigurationReference = 2A2764E1158B149D8B19297F /* Pods-Snack Habbits.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Snack Habbits/Snack Habbits.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = V3KUBC4QCP;
 				INFOPLIST_FILE = "$(SRCROOT)/Snack Habbits/Support Files/Info.plist";

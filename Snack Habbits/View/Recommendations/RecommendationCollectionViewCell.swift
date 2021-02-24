@@ -28,8 +28,8 @@ class RecommendationCollectionViewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         ratingLabel.text = "\(result.aggregateLikes) Likes"
         
-        calorieLabel.text = "\(result.nutrition.nutrients[0].amount) \(result.nutrition.nutrients[0].unit) per serving"
-        
+
+        calorieLabel.text = "\(result.calories.amount) \(result.calories.unit) per serving"
         var tags = ""
         if result.vegetarian {
             tags.append("vegetarian      ")
@@ -59,21 +59,21 @@ class RecommendationCollectionViewCell: UICollectionViewCell {
             tags.append("very-healthy      ")
         }
         
-//        for dishType in result.dishTypes {
-//            if dishType != "main course" {
-//                tags.append("\(dishType)      ") // eliminates duplicates
-//            }
-//        }
-//        
-//        for cuisine in result.cuisines {
-//            let cuisine = cuisine.lowercased()
-//            tags.append("\(cuisine)      ") // eliminates duplicates
-//        }
-//        
-//        for diet in result.diets {
-//            let diet = diet.lowercased()
-//            tags.append("\(diet)      ") // eliminates duplicates
-//        }
+        for dishType in result.dishTypes {
+            if dishType != "main course" {
+                tags.append("\(dishType)      ") // eliminates duplicates
+            }
+        }
+        
+        for cuisine in result.cuisines {
+            let cuisine = cuisine.lowercased()
+            tags.append("\(cuisine)      ") // eliminates duplicates
+        }
+        
+        for diet in result.diets {
+            let diet = diet.lowercased()
+            tags.append("\(diet)      ") // eliminates duplicates
+        }
         tagLabel.text = tags
     }
 }

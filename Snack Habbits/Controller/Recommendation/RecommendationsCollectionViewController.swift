@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 //private let reuseIdentifier = "RecommendationCell"
 
-
+import HealthKit
 class RecommendationsCollectionViewController: UICollectionViewController {
 
     //MARK:- Properties
@@ -19,7 +19,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     private var meals = [Meal]()
     let dispatchQueue = DispatchQueue(label: "myQueue", qos: .background)
     let semaphore = DispatchSemaphore(value: 0)
-    
+    let healthStore = HKHealthStore()
     let activityIndicatorView: UIActivityIndicatorView = {
         let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.color = .black
@@ -31,12 +31,16 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        authorizeHealthKit()
         setupActivityIndicator()
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         fetchRecipes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        
         super.viewDidAppear(animated)
         if Auth.auth().currentUser == nil {
             let loginController = LoginViewController()
@@ -46,8 +50,84 @@ class RecommendationsCollectionViewController: UICollectionViewController {
             present(navController, animated: true)
         } else {
             fetchRecipes()
+            getSteps { (steps) in
+                print("step Count \(steps)")
+                self.updateUserSteps(count: steps)
+            }
         }
     }
+    
+    private func authorizeHealthKit() {
+        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+              
+          guard authorized else {
+                
+            let baseMessage = "HealthKit Authorization Failed"
+                
+            if let error = error {
+              print("\(baseMessage). Reason: \(error.localizedDescription)")
+            } else {
+              print(baseMessage)
+            }
+                
+            return
+          }
+              
+          print("HealthKit Successfully Authorized.")
+            self.getSteps { (steps) in
+                print(steps)
+            }
+        }
+        
+    }
+    
+    func getSteps(completion: @escaping (Double) -> Void){
+        let type = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+            
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        var interval = DateComponents()
+        interval.day = 1
+        
+        let query = HKStatisticsCollectionQuery(quantityType: type,
+                                               quantitySamplePredicate: nil,
+                                               options: [.cumulativeSum],
+                                               anchorDate: startOfDay,
+                                               intervalComponents: interval)
+        
+        
+        query.initialResultsHandler = { _, result, error in
+                var resultCount = 0.0
+                result!.enumerateStatistics(from: startOfDay, to: now) { statistics, _ in
+
+                if let sum = statistics.sumQuantity() {
+                    // Get steps (they are of double type)
+                    resultCount = sum.doubleValue(for: HKUnit.count())
+                } // end if
+
+                // Return
+                DispatchQueue.main.async {
+                    completion(resultCount)
+                }
+            }
+        }
+        
+        query.statisticsUpdateHandler = {
+            query, statistics, statisticsCollection, error in
+
+            // If new statistics are available
+            if let sum = statistics?.sumQuantity() {
+                let resultCount = sum.doubleValue(for: HKUnit.count())
+                // Return
+                DispatchQueue.main.async {
+                    completion(resultCount)
+                }
+            } // end if
+        }
+        
+        healthStore.execute(query)
+    }
+    
     
     //MARK:- Setup
     private func setupActivityIndicator() {
@@ -64,8 +144,10 @@ class RecommendationsCollectionViewController: UICollectionViewController {
         dispatchQueue.async {
             self.fetchCurrentUser(with: uid)
             self.semaphore.wait()
+            print("Success Fetched Users")
             self.fetchUserMeals(with: uid)
             self.semaphore.wait()
+            print("Success `Fetched Meals")
             self.fetchRecommendations()
         }
 
@@ -127,10 +209,10 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     }
     
     func fetchRecommendations() {
-        var context = Context(meals: self.meals, caloriesBurned: 1000.0, currHour: Helper.getCalendarHour())
-        guard let currentUser = user else { return }
-        var recipeRequest = RecipeRequestBody(user: currentUser, context: context)
         
+        guard let currentUser = user else { return }        
+        var context = Context(meals: self.meals, caloriesBurned: Float(currentUser.dailySteps!) , currHour: Helper.getCalendarHour())
+        var recipeRequest = RecipeRequestBody(user: currentUser, context: context)
         APIService.shared.fetchMeals(recipeRequestBody: recipeRequest) { (results, error) in
             if let error = error {
                 print("Failed to fetch recipes", error)
@@ -147,6 +229,24 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     }
     
     
+    func updateUserSteps(count: Double){
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+         let docData: [String: Any] = [
+            "uid": uid,
+            "steps": count
+        ]
+
+        Firestore.firestore().collection("users").document(uid).setData(docData, merge: true) { (error) in
+
+            if let error = error {
+                print("Error saving user settings: ", error)
+                return
+            }
+
+        }
+        print("Saved user steps:", docData)
+    }
     
     // MARK: UICollectionViewDataSource
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -192,6 +292,8 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     }
 
 
+    //MARK:- Health Kit
+    
 }
 
 extension RecommendationsCollectionViewController: UICollectionViewDelegateFlowLayout {

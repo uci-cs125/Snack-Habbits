@@ -12,7 +12,8 @@ class APIService {
     static let shared = APIService()
     // TODO:- Use Date as part of query in order to return relevant results (Breakfast, Lunch, Dinner)
     func fetchMeals(recipeRequestBody: RecipeRequestBody, completion: @escaping (SearchResult?, Error?) -> ()) {
-        let urlString = "http://localhost:5000/recipes/"
+//        let urlString = "http://localhost:5000/recipes/"
+        let urlString = "https://recommendations-backend-dev.herokuapp.com/recipes"
         fetch(urlString: urlString, requestBody: recipeRequestBody, completion: completion)
     }
     
@@ -37,7 +38,6 @@ class APIService {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
   
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
@@ -46,12 +46,13 @@ class APIService {
                 return
             }
             guard let data = data else { return }
-            print(String(data: data, encoding: String.Encoding.utf8 ) ?? "Cant be printed")
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
+                print("Decoded results in APIService")
                 completion(decodedData, nil)
             } catch let jsonErr {
-                print("Failed to decode json: ", jsonErr)
+//                print("Failed to decode json in APIService: ", jsonErr)
+//                print(String(data: data, encoding: String.Encoding.utf8))
                 completion(nil, jsonErr)
             }
             }.resume() //END URLSession
@@ -81,7 +82,8 @@ class APIService {
     func postLikedMeal(uid: String, recipeID: Int32, completion: @escaping(Data?, URLResponse?, Error?) ->()) {
 
         //let mock_recipe_id = Int(715544)
-        let url = URL(string: "http://localhost:5000/likes/")!
+//        let url = URL(string: "http://localhost:5000/likes/")!
+        let url = URL(string: "https://recommendations-backend-dev.herokuapp.com/likes")!
         let parameters: [String:Any] = [
             "user_id" : "\(uid)",
             "recipe_id": recipeID

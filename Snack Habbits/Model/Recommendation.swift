@@ -18,7 +18,7 @@ struct Result: Decodable {
     let id:                 Int32
     let image:              String
     let title:              String
-    let nutrition:          Nutrition
+//    let nutrition:          Nutrition
     let vegetarian:         Bool
     let vegan:              Bool
     let glutenFree:         Bool
@@ -33,6 +33,17 @@ struct Result: Decodable {
     let nutritionalScore:   Float
     let tasteScore:         Float
     let sourceUrl:          String
+    let calories:           Nutrient
+    let fat:                Nutrient
+    let saturatedFat:       Nutrient
+    let cholesterol:        Nutrient
+    let sodium:             Nutrient
+    let carbohydrates:      Nutrient
+    let netCarbohydrates:   Nutrient
+    let fiber:              Nutrient
+    let sugar:              Nutrient
+    let protein:            Nutrient
+    
 }
 
 struct Nutrition: Decodable {
@@ -40,9 +51,10 @@ struct Nutrition: Decodable {
 }
 
 struct Nutrient: Decodable {
-    let name: String
-    let amount: Double
-    let unit: String
+    let name:                   String
+    let amount:                 Double
+    let unit:                   String
+    let percentOfDailyNeeds:    Double
 }
 
  

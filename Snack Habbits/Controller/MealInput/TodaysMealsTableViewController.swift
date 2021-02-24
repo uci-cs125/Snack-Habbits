@@ -18,13 +18,13 @@ class TodaysMealsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         meals = [Meal]()
-        fetchUserMeals()
+        //fetchUserMeals()
         tableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //fetchUserMeals()
+        fetchUserMeals()
     }
     
 

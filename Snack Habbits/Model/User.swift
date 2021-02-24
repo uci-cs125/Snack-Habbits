@@ -20,6 +20,7 @@ struct User: Codable {
     var weeklyTarget:   String?
     var activityLevel:  String?
     var gender:         String?
+    var dailySteps:     Double?
     
     init(dictionary: [String: Any]) {
         // Initialize user
@@ -32,6 +33,7 @@ struct User: Codable {
         self.weeklyTarget   = dictionary["weeklyTarget"]    as? String ?? ""
         self.activityLevel  = dictionary["activityLevel"]   as? String ?? ""
         self.gender         = dictionary["gender"]          as? String ?? ""
+        self.dailySteps     = dictionary["steps"]           as? Double ?? 0
     }
     
 }

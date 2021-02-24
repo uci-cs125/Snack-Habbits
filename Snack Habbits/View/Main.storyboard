@@ -887,8 +887,8 @@
                         <outlet property="fatDaily" destination="BHC-MV-o7d" id="4Zf-8J-Fvi"/>
                         <outlet property="fatLabel" destination="mpa-mK-aKL" id="oxM-kp-Iph"/>
                         <outlet property="fiberLabel" destination="PPy-mf-oer" id="MNs-6j-fg0"/>
-                        <outlet property="proteinDaily" destination="Nuh-al-Mch" id="6bF-KE-Dih"/>
-                        <outlet property="proteinLabel" destination="j75-mF-BtO" id="p4B-sF-mJe"/>
+                        <outlet property="proteinDailyLabel" destination="BIR-at-9By" id="RB1-06-HuM"/>
+                        <outlet property="proteinLabel" destination="j75-mF-BtO" id="BO5-mp-dxS"/>
                         <outlet property="recipeImage" destination="ziX-su-7dJ" id="8QK-Gy-J4J"/>
                         <outlet property="saturatedFatLabel" destination="yfo-RX-bGP" id="Ib2-US-d7f"/>
                         <outlet property="sodiumDaily" destination="Gb1-Ux-oNu" id="W4E-UY-w5x"/>
@@ -1042,21 +1042,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationLevel="1" indentationWidth="15" reuseIdentifier="MealCell" textLabel="Kxu-5b-PzI" detailTextLabel="Cc1-IC-6Ln" style="IBUITableViewCellStyleSubtitle" id="OCd-vz-4U5">
-                                <rect key="frame" x="0.0" y="28" width="414" height="55.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="48.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OCd-vz-4U5" id="Nuo-DZ-ByC">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="55.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="48.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kxu-5b-PzI">
-                                            <rect key="frame" x="35" y="9.5" width="28.5" height="17"/>
+                                            <rect key="frame" x="35" y="6.5" width="28.5" height="17"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="1500.75 kcals" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="Cc1-IC-6Ln">
-                                            <rect key="frame" x="35" y="29" width="77.5" height="14.5"/>
+                                            <rect key="frame" x="35" y="26" width="77.5" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
