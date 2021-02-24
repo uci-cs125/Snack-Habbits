@@ -32,6 +32,7 @@ struct Result: Decodable {
     let diets:              [String]
     let nutritionalScore:   Float
     let tasteScore:         Float
+    let sourceUrl:          String
 }
 
 struct Nutrition: Decodable {

@@ -11,22 +11,20 @@ import Firebase
 class TodaysMealsTableViewController: UITableViewController {
 
     //MARK:- Properties
-    var meals = [Meal]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    
+    var meals = [Meal]()
+
+            
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        meals = [Meal]()
         fetchUserMeals()
         tableView.tableFooterView = UIView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //fetchUserMeals()
     }
     
 
@@ -93,6 +91,7 @@ class TodaysMealsTableViewController: UITableViewController {
     }
 
     private func fetchUserMeals(){
+        meals = [Meal]()
         let date = Helper.getDate()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         Firestore.firestore().collection("meals").document(uid).getDocument { (documentSnapshot, error) in
@@ -126,8 +125,8 @@ class TodaysMealsTableViewController: UITableViewController {
 extension TodaysMealsTableViewController: MealInputTableViewControllerDelegate {
     func didSave(meal: Meal) {
         meals.append(meal)
-        tableView.reloadData()
         saveMealToFirestore()
+        tableView.reloadData()
     }
     
 }

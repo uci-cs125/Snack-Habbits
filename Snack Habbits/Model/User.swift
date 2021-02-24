@@ -20,6 +20,7 @@ struct User: Codable {
     var weeklyTarget:   String?
     var activityLevel:  String?
     var gender:         String?
+    
     init(dictionary: [String: Any]) {
         // Initialize user
         self.uid            = dictionary["uid"]             as? String ?? ""

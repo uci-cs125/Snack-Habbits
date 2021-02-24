@@ -19,15 +19,21 @@ class RecommendationDetailViewController: UIViewController {
     @IBOutlet weak var recipeImage: UIImageView!
     @IBOutlet weak var calorieLabel: UILabel!
     @IBOutlet weak var fatLabel: UILabel!
+    @IBOutlet weak var fatDaily: UILabel!
     @IBOutlet weak var saturatedFatLabel: UILabel!
     @IBOutlet weak var cholesterolLabel: UILabel!
+    @IBOutlet weak var cholesterolDaily: UILabel!
     @IBOutlet weak var sodiumLabel: UILabel!
+    @IBOutlet weak var sodiumDaily: UILabel!
     @IBOutlet weak var carbLabel: UILabel!
+    @IBOutlet weak var carbDaily: UILabel!
     @IBOutlet weak var fiberLabel: UILabel!
     @IBOutlet weak var sugarLabel: UILabel!
     @IBOutlet weak var proteinLabel: UILabel!
+    @IBOutlet weak var proteinDaily: UIStackView!
     
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,10 +61,45 @@ class RecommendationDetailViewController: UIViewController {
         self.present(ac, animated: true, completion: nil)
     }
     
-    private func setupUI(){
+
+    @IBAction func recipeLinkClicked(_ sender: UIButton) {
         guard let recipe = recommendedRecipe else { return }
+        if let url = URL(string: recipe.sourceUrl){
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    private func setupUI(){
+
+        guard let recipe = recommendedRecipe else { return }
+        recipeImage.layer.cornerRadius = 12
+        recipeImage.layer.masksToBounds = true
         titleLabel.text = recipe.title
-        
+        let imageUrl = URL(string: recipe.image)
+        recipeImage.sd_setImage(with:imageUrl)
+        guard let recommendedRecipe = recommendedRecipe else { return }
+        for nutrient in recommendedRecipe.nutrition.nutrients {
+            switch nutrient.name {
+            case "Calories":
+                calorieLabel.text = "\(nutrient.amount) CALORIES PER SERVING)"
+            case "Fat":
+                fatLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Saturdated Fat":
+                saturatedFatLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Carbohydrates":
+                carbLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Cholesterol":
+                cholesterolLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Sodium":
+                sodiumLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Sugar":
+                sugarLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            case "Protein":
+                proteinLabel.text = "\(nutrient.amount) \(nutrient.unit)"
+            default:
+                break
+            }
+        }
     }
     
     
