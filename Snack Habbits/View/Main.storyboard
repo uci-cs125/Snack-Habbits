@@ -613,16 +613,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="PAd-rK-bnM">
-                                <rect key="frame" x="20" y="430" width="374" height="21"/>
+                                <rect key="frame" x="20" y="430" width="344" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Complete Nutritional Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwB-vU-IMR">
-                                        <rect key="frame" x="0.0" y="0.0" width="302.5" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="272.5" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="%DV*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcQ-w8-yWJ">
-                                        <rect key="frame" x="326.5" y="0.0" width="47.5" height="21"/>
+                                        <rect key="frame" x="296.5" y="0.0" width="47.5" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="Sb1-lz-gXe"/>
                                         </constraints>
@@ -861,7 +861,7 @@
                             <constraint firstItem="PAd-rK-bnM" firstAttribute="leading" secondItem="ehW-1t-hEH" secondAttribute="leading" constant="20" id="s76-gQ-fMB"/>
                             <constraint firstItem="aar-ay-2mn" firstAttribute="leading" secondItem="ehW-1t-hEH" secondAttribute="leading" constant="20" id="vg7-co-R2v"/>
                             <constraint firstItem="ehW-1t-hEH" firstAttribute="trailing" secondItem="aar-ay-2mn" secondAttribute="trailing" constant="20" id="y1g-zx-Jbp"/>
-                            <constraint firstItem="ehW-1t-hEH" firstAttribute="trailing" secondItem="PAd-rK-bnM" secondAttribute="trailing" constant="20" id="ziA-Di-dxK"/>
+                            <constraint firstItem="ehW-1t-hEH" firstAttribute="trailing" secondItem="PAd-rK-bnM" secondAttribute="trailing" constant="50" id="ziA-Di-dxK"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
