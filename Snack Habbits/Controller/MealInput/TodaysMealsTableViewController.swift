@@ -139,9 +139,16 @@ extension TodaysMealsTableViewController: MealInputTableViewControllerDelegate {
     func didSave(meal: Meal) {
         meals.append(meal)
         saveMealToFirestore()
-        print("delegate?.didSaveNewMeal()")
         delegate?.didSaveNewMeal()
 
+        tableView.reloadData()
+    }
+    
+    func didEditMeal(meal: Meal) {
+        meals[swipedIndex!.row] = meal
+        saveMealToFirestore()
+        self.swipedIndex = nil
+        //delegate?.didSaveNewMeal()
         tableView.reloadData()
     }
     
@@ -160,7 +167,6 @@ extension TodaysMealsTableViewController: SwipeTableViewCellDelegate {
         let deleteAction = SwipeAction(style: .default , title: nil) { (action, indexPath) in
             //Dismiss swipe
             self.meals.remove(at: indexPath.row)
-            print(self.meals[indexPath.row])
             action.hidesWhenSelected = true
             self.swipedIndex = nil
             self.saveMealToFirestore()
@@ -169,14 +175,14 @@ extension TodaysMealsTableViewController: SwipeTableViewCellDelegate {
         
         let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
             action.hidesWhenSelected = true
-            self.swipedIndex = nil
             let storyboard = UIStoryboard(name: "Main", bundle:  Bundle(for: type(of: self)))
-
+            self.swipedIndex = indexPath
             let editMealVC = storyboard.instantiateViewController(identifier: "MealInput") as MealInputTableViewController
             
             editMealVC.delegate = self
             editMealVC.editMeal = self.meals[indexPath.row]
-            editMealVC.enabled = true
+            editMealVC.saveButtonEnabled = true
+            editMealVC.isEditingMeal = true
             //editToDoVC.toDo = self.toDoTasks?[indexPath.row]
             self.navigationController?.pushViewController(editMealVC, animated: true)
             // Dismiss swipe

@@ -68,7 +68,7 @@ class APIService {
         do {
             let httpBody = try encoder.encode(requestBody)
             if let JSONString = String(data: httpBody, encoding: String.Encoding.utf8) {
-               print(JSONString)
+               //print(JSONString)
             }
             request.httpBody = httpBody
         } catch {

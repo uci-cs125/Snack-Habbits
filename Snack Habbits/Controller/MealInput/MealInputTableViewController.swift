@@ -10,6 +10,7 @@ import UIKit
 
 protocol MealInputTableViewControllerDelegate {
     func didSave(meal: Meal)
+    func didEditMeal(meal: Meal)
 }
 
 
@@ -32,12 +33,13 @@ class MealInputTableViewController: UITableViewController {
     @IBOutlet weak var totalProteinLabel: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    var enabled = false
+    var saveButtonEnabled = false
+    var isEditingMeal = false
     //MARK:- Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        saveButton.isEnabled = enabled
+        saveButton.isEnabled = saveButtonEnabled
         
         mealNameLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         totalCaloriesLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
@@ -71,7 +73,12 @@ class MealInputTableViewController: UITableViewController {
             meal.protein = Float(protein)!
         }
         
-        delegate?.didSave(meal: meal)
+        if isEditingMeal {
+            delegate?.didEditMeal(meal: meal)
+        }else {
+            delegate?.didSave(meal: meal)
+        }
+        
         self.navigationController?.popViewController(animated: true)
     }
     

@@ -104,10 +104,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         calorieGoal.lineDashLengths = [8.0]
         lineChartView.leftAxis.addLimitLine(calorieGoal)
         lineChartView.animate(yAxisDuration: 0.00001)
-//        if let line = lineChartView.rightAxis.limitLines.filter({ $0.label == "Goal" }).first {
-//            line.limit = limit
-//            lineChartView.animate(yAxisDuration: 0.00001)
-//        }
+
 
     }
     
