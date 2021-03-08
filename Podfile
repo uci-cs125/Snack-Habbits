@@ -15,5 +15,5 @@ target 'Snack Habbits' do
 	pod 'JGProgressHUD', '~>2.0.3'
 	pod 'Charts'
 	pod 'TinyConstraints'
-
+	pod 'SwipeCellKit'
 end

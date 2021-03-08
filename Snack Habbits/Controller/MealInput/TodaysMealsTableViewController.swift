@@ -8,19 +8,23 @@
 
 import UIKit
 import Firebase
+import SwipeCellKit
+
 class TodaysMealsTableViewController: UITableViewController {
 
     //MARK:- Properties
     var meals = [Meal]()
     var delegate: TodaysMealsDelegate?
-            
+    // Used to keep track of which cell has an open SwipeAction
+    var swipedIndex: IndexPath?
+    
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         meals = [Meal]()
         //fetchUserMeals()
         tableView.tableFooterView = UIView()
-        
+        tableView.register(MealInputCell.self, forCellReuseIdentifier: "MealCell")
 
         
 
@@ -45,13 +49,18 @@ class TodaysMealsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MealCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MealCell") as! MealInputCell
         let meal = meals[indexPath.row]
-        cell.textLabel?.text = "\(meal.name!)"
-        cell.detailTextLabel?.text = "\(meal.calories!) kcals"
+        cell.meal = meal
+        cell.delegate = self
+
+//        cell.textLabel?.text = "\(meal.name!)"
+//        cell.detailTextLabel?.text = "\(meal.calories!) kcals"
         return cell
     }
-    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
     //MARK:- Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -122,6 +131,7 @@ class TodaysMealsTableViewController: UITableViewController {
             }
         }
     }
+    
 
 }
 
@@ -139,4 +149,53 @@ extension TodaysMealsTableViewController: MealInputTableViewControllerDelegate {
 
 protocol TodaysMealsDelegate {
     func didSaveNewMeal()
+}
+
+//MARK:- SwipeCell Delegate Methods
+extension TodaysMealsTableViewController: SwipeTableViewCellDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        
+        guard orientation == .right else { return nil }
+        
+        let deleteAction = SwipeAction(style: .default , title: nil) { (action, indexPath) in
+            //Dismiss swipe
+            self.meals.remove(at: indexPath.row)
+            print(self.meals[indexPath.row])
+            action.hidesWhenSelected = true
+            self.swipedIndex = nil
+            self.saveMealToFirestore()
+            self.tableView.reloadData()
+        }
+        
+//        let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
+//
+//            let editToDoVC = EditToDoTableController()
+//            editToDoVC.toDo = self.toDoTasks?[indexPath.row]
+//            self.navigationController?.pushViewController(editToDoVC, animated: true)
+//            // Dismiss swipe
+//            action.hidesWhenSelected = true
+//            self.swipedIndex = nil
+//
+//
+//        }
+        
+        // customize the action appearance
+        deleteAction.image = #imageLiteral(resourceName: "trash-icon-white").resizedImage(newSize: CGSize(width: 28  , height: 28))
+        deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.009361755543, alpha: 1)
+//
+//        editAction.image = UIImage.ToDo.settings.resizedImage(newSize: CGSize(width: 28 , height: 28))
+//        editAction.backgroundColor = UIColor.ToDo.editSwipeBackgroundColor
+//
+//        return [deleteAction, editAction]
+        
+        return [deleteAction]
+        
+    }
+    
+    // Used to ensure swiped cell is dismissed when transitioning to new scene
+    func collectionView(_ collectionView: UICollectionView, willBeginEditingItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) {
+        swipedIndex = indexPath
+    }
+    
+    
 }

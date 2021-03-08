@@ -27,6 +27,9 @@
 		F021EE2A25B4F047003EBF6F /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */; };
 		F021EE2F25B4F73E003EBF6F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */; };
 		F03EDC7D25F4296600118379 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EDC7C25F4296600118379 /* BalloonMarker.swift */; };
+		F03EDC8125F5D37000118379 /* MealInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EDC8025F5D37000118379 /* MealInputCell.swift */; };
+		F03EDCA225F5D92900118379 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EDCA125F5D92900118379 /* UIImage+Resize.swift */; };
+		F03EDCA525F5DABB00118379 /* UILabel+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EDCA425F5DABB00118379 /* UILabel+Init.swift */; };
 		F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058B27A25B694EA002E02F5 /* LoginViewController.swift */; };
 		F058B27F25B694FC002E02F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058B27E25B694FC002E02F5 /* LoginViewModel.swift */; };
 		F058D0C625C5F33400325DF1 /* BaseCollectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F058D0C525C5F33400325DF1 /* BaseCollectionCollectionViewController.swift */; };
@@ -70,6 +73,9 @@
 		F021EE2925B4F047003EBF6F /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		F021EE2E25B4F73E003EBF6F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		F03EDC7C25F4296600118379 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
+		F03EDC8025F5D37000118379 /* MealInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealInputCell.swift; sourceTree = "<group>"; };
+		F03EDCA125F5D92900118379 /* UIImage+Resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
+		F03EDCA425F5DABB00118379 /* UILabel+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Init.swift"; sourceTree = "<group>"; };
 		F058B27A25B694EA002E02F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F058B27E25B694FC002E02F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		F058D0C525C5F33400325DF1 /* BaseCollectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionCollectionViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				F01D607725D9B19900462E4D /* Main.storyboard */,
 				F058D0CC25C5F51300325DF1 /* Recommendations */,
 				F021EE2D25B4F716003EBF6F /* UIElements */,
+				F03EDC7F25F5D32A00118379 /* Meal Input */,
 				F021EE2C25B4F701003EBF6F /* Register */,
 			);
 			path = View;
@@ -198,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				F01C897525B4BF6400D54CFD /* UIView+Layout.swift */,
+				F03EDCA125F5D92900118379 /* UIImage+Resize.swift */,
+				F03EDCA425F5DABB00118379 /* UILabel+Init.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,6 +278,14 @@
 				F03EDC7C25F4296600118379 /* BalloonMarker.swift */,
 			);
 			path = UIElements;
+			sourceTree = "<group>";
+		};
+		F03EDC7F25F5D32A00118379 /* Meal Input */ = {
+			isa = PBXGroup;
+			children = (
+				F03EDC8025F5D37000118379 /* MealInputCell.swift */,
+			);
+			path = "Meal Input";
 			sourceTree = "<group>";
 		};
 		F058B27925B694AF002E02F5 /* Login */ = {
@@ -467,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F01D60AF25DA27A400462E4D /* MealInputTableViewController.swift in Sources */,
+				F03EDC8125F5D37000118379 /* MealInputCell.swift in Sources */,
 				F0D1E45825E75FB500A9EF55 /* RootTabBarController.swift in Sources */,
 				F098782325F40C1600D20444 /* TrackingProgressViewController.swift in Sources */,
 				F021EE2625B4E701003EBF6F /* Helper.swift in Sources */,
@@ -475,6 +493,7 @@
 				F01C897625B4BF6400D54CFD /* UIView+Layout.swift in Sources */,
 				F058D0D225C5F72C00325DF1 /* Recommendation.swift in Sources */,
 				F01D60BE25DB701500462E4D /* Meal.swift in Sources */,
+				F03EDCA525F5DABB00118379 /* UILabel+Init.swift in Sources */,
 				F089476E25B63B4400A888B1 /* Bindable.swift in Sources */,
 				F0C3B6A425E4A2CD00E26C78 /* RecipeRequestBody.swift in Sources */,
 				F01D608025D9B2D100462E4D /* SelectWeeklyTargetTableViewController.swift in Sources */,
@@ -486,6 +505,7 @@
 				F089473025B6167D00A888B1 /* RegistrationViewModel.swift in Sources */,
 				F0D1E44C25E7086600A9EF55 /* HealthKitSetupAssist.swift in Sources */,
 				F058B27F25B694FC002E02F5 /* LoginViewModel.swift in Sources */,
+				F03EDCA225F5D92900118379 /* UIImage+Resize.swift in Sources */,
 				F058D0C625C5F33400325DF1 /* BaseCollectionCollectionViewController.swift in Sources */,
 				F058B27B25B694EA002E02F5 /* LoginViewController.swift in Sources */,
 				F01D609C25D9D04000462E4D /* RecommendationsCollectionViewController.swift in Sources */,
