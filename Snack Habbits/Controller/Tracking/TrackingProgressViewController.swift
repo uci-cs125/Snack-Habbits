@@ -71,8 +71,21 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     }
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
+    }
+    
+    
+    private func updateLineLimit(_ value: Double, label: String) {
+        if let line = lineChartView.rightAxis.limitLines.filter({ $0.label == label }).first {
+            line.limit = value
+            lineChartView.animate(yAxisDuration: 0.00001)
+        }
     }
     
     func setData() {
@@ -177,17 +190,11 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
 
                 }
                 
-                let entry = ChartDataEntry(x: Double(i), y: Double(totalCals))
+                let entry = ChartDataEntry(x: Double(i), y: Double(Int(totalCals)))
                 self.calorieValues.append(entry)
-                
             }
             
-
-
-            //let entry = ChartDataEntry(x: Double(0.0), y: Double(0.0))
-            //self.calorieValues.append(entry)
             DispatchQueue.main.async {
-    
                 self.setData()
             }
         }
