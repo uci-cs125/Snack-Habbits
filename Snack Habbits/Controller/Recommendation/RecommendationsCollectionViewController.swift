@@ -31,17 +31,15 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        authorizeHealthKit()
-        setupActivityIndicator()
+       
+
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        fetchRecipes()
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.title = "Recipes For You"
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+//        navigationController?.navigationBar.prefersLargeTitles = true
+        super.viewWillAppear(animated)
         if Auth.auth().currentUser == nil {
             let loginController = LoginViewController()
             loginController.delegate = self
@@ -49,11 +47,11 @@ class RecommendationsCollectionViewController: UICollectionViewController {
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
         } else {
-            fetchRecipes()
+            authorizeHealthKit()
             getSteps { (steps) in
-                print("step Count \(steps)")
                 self.updateUserSteps(count: steps)
             }
+            fetchRecipes()
         }
     }
     
@@ -75,7 +73,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
               
           print("HealthKit Successfully Authorized.")
             self.getSteps { (steps) in
-                print(steps)
+                self.updateUserSteps(count: steps)
             }
         }
         
@@ -133,11 +131,12 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     private func setupActivityIndicator() {
         view.addSubview(activityIndicatorView)
         activityIndicatorView.fillSuperview()
+        activityIndicatorView.startAnimating()
     }
     
     //MARK:- API Service
     fileprivate func fetchRecipes() {
-        
+        setupActivityIndicator()
         let date = Helper.getDate()
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -147,10 +146,10 @@ class RecommendationsCollectionViewController: UICollectionViewController {
             print("Success Fetched Users")
             self.fetchUserMeals(with: uid)
             self.semaphore.wait()
-            print("Success `Fetched Meals")
+            print("Success Fetched Meals")
             self.fetchRecommendations()
         }
-
+        print("Success `Fetched Recommendations")
     }
     
 
@@ -211,7 +210,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     func fetchRecommendations() {
         
         guard let currentUser = user else { return }        
-        var context = Context(meals: self.meals, caloriesBurned: Float(currentUser.dailySteps!) , currHour: Helper.getCalendarHour())
+        var context = Context(meals: self.meals, dailySteps: Float(currentUser.dailySteps!) , currHour: Helper.getCalendarHour())
         var recipeRequest = RecipeRequestBody(user: currentUser, context: context)
         APIService.shared.fetchMeals(recipeRequestBody: recipeRequest) { (results, error) in
             if let error = error {
@@ -306,14 +305,19 @@ extension RecommendationsCollectionViewController: UICollectionViewDelegateFlowL
 extension RecommendationsCollectionViewController: SettingsControllerDelegate {
     func didSaveSettings(user: User?) {
         self.user = user
+        
     }
         
 }
 
 extension RecommendationsCollectionViewController: LoginControllerDelegate {
     func didFinishLoggingIn() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        fetchCurrentUser(with: uid)
-        fetchUserMeals(with: uid)
+        
+    }
+}
+
+extension RecommendationsCollectionViewController: TodaysMealsDelegate {
+    func didSaveNewMeal() {
+        print("New Meal Has Been Added")
     }
 }

@@ -26,6 +26,8 @@ class Helper {
         return format.string(from: date)
     }
     
+
+    
     static func getCalendarHour() -> Int {
         let date = Date()
         let calendar = Calendar.current

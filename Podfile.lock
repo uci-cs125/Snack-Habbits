@@ -5,6 +5,9 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - Charts (3.6.0):
+    - Charts/Core (= 3.6.0)
+  - Charts/Core (3.6.0)
   - Firebase/Auth (5.10.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.4)
@@ -126,8 +129,10 @@ PODS:
   - SDWebImage (4.4.8):
     - SDWebImage/Core (= 4.4.8)
   - SDWebImage/Core (4.4.8)
+  - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
+  - Charts
   - Firebase/Auth (~> 5.10.0)
   - Firebase/Core
   - Firebase/Firestore (~> 5.10.0)
@@ -135,10 +140,12 @@ DEPENDENCIES:
   - GoogleAppMeasurement (~> 5.2.0)
   - JGProgressHUD (~> 2.0.3)
   - SDWebImage (~> 4.4.2)
+  - TinyConstraints
 
 SPEC REPOS:
   trunk:
     - BoringSSL-GRPC
+    - Charts
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -160,9 +167,11 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - SDWebImage
+    - TinyConstraints
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  Charts: b1e3a1f5a1c9ba5394438ca3b91bd8c9076310af
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseAuth: 504b198ceb3472dca5c65bb95544ea44cfc9439e
@@ -184,7 +193,8 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   Protobuf: 0cde852566359049847168e51bd1c690e0f70056
   SDWebImage: 783af2c3fa36291a250030c4752ee370a9a51d13
+  TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: a54c8dd9836835a907858cf52b37e9b137ec58c1
+PODFILE CHECKSUM: 8ebe4a1c82244f0663b0a35631c2d1912d11f335
 
 COCOAPODS: 1.10.1

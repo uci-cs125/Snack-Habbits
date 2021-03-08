@@ -12,7 +12,7 @@ class TodaysMealsTableViewController: UITableViewController {
 
     //MARK:- Properties
     var meals = [Meal]()
-
+    var delegate: TodaysMealsDelegate?
             
     //MARK:- Lifecycle
     override func viewDidLoad() {
@@ -20,6 +20,10 @@ class TodaysMealsTableViewController: UITableViewController {
         meals = [Meal]()
         //fetchUserMeals()
         tableView.tableFooterView = UIView()
+        
+
+        
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +45,6 @@ class TodaysMealsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("Cell For row at \(meals.count)")
         let cell = tableView.dequeueReusableCell(withIdentifier: "MealCell", for: indexPath)
         let meal = meals[indexPath.row]
         cell.textLabel?.text = "\(meal.name!)"
@@ -126,7 +129,14 @@ extension TodaysMealsTableViewController: MealInputTableViewControllerDelegate {
     func didSave(meal: Meal) {
         meals.append(meal)
         saveMealToFirestore()
+        print("delegate?.didSaveNewMeal()")
+        delegate?.didSaveNewMeal()
+
         tableView.reloadData()
     }
     
+}
+
+protocol TodaysMealsDelegate {
+    func didSaveNewMeal()
 }

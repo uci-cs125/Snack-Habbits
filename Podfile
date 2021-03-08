@@ -13,5 +13,7 @@ target 'Snack Habbits' do
 	pod 'GoogleAppMeasurement', '~> 5.2.0'
 	pod 'SDWebImage', '~>4.4.2'
 	pod 'JGProgressHUD', '~>2.0.3'
+	pod 'Charts'
+	pod 'TinyConstraints'
 
 end

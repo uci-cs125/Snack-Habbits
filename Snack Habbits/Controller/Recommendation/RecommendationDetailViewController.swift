@@ -46,6 +46,7 @@ class RecommendationDetailViewController: UIViewController {
 
         setupUI()
         fetchUserMeals()
+        
     }
     
     @IBAction func addToMealTapped(_ sender: Any) {
@@ -78,9 +79,9 @@ class RecommendationDetailViewController: UIViewController {
     }
     
     private func setupUI(){
-
-        guard let recipe = recommendedRecipe else { return }
         
+        guard let recipe = recommendedRecipe else { return }
+        navigationController?.navigationBar.prefersLargeTitles = false
         recipeImage.layer.cornerRadius = 12
         recipeImage.layer.masksToBounds = true
         
@@ -189,12 +190,9 @@ class RecommendationDetailViewController: UIViewController {
                         return
             }
             guard (200 ... 299) ~= response.statusCode else {
-                print("\(response.statusCode)")
-                print("\(response)")
                 return
             }
-            let responseString = String(data: data, encoding: .utf8)
-            print("\(responseString)")
+
         }
               
     }
