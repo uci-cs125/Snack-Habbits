@@ -13,6 +13,12 @@ struct SearchResult: Decodable {
     let results: [Result]
 }
 
+struct CalorieResult:Decodable {
+    let results: [Float]
+    let number: Int
+}
+
+
 
 struct Result: Decodable {
     let id:                 Int32

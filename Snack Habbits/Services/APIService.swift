@@ -10,11 +10,54 @@ import Foundation
 
 class APIService {
     static let shared = APIService()
-    // TODO:- Use Date as part of query in order to return relevant results (Breakfast, Lunch, Dinner)
+
     func fetchMeals(recipeRequestBody: RecipeRequestBody, completion: @escaping (SearchResult?, Error?) -> ()) {
-//        let urlString = "http://localhost:5000/recipes/"
-        let urlString = "https://recommendations-backend-dev.herokuapp.com/recipes"
+        let urlString = "http://localhost:5000/recipes/"
+//        let urlString = "https://recommendations-backend-dev.herokuapp.com/recipes"
         fetch(urlString: urlString, requestBody: recipeRequestBody, completion: completion)
+    }
+    
+    func fetchCalorieGoal(calorieRequestBody: CalorieRequestBody, completion: @escaping(CalorieResult?, Error?) -> ()){
+        let urlString = "http://localhost:5000/calories/"
+        fetchCalories(urlString: urlString, requestBody: calorieRequestBody, completion: completion)
+    }
+    
+    func fetchCalories<T: Decodable>(urlString: String,requestBody: CalorieRequestBody, completion: @escaping (T?, Error?) -> ()) {
+        guard let url = URL(string: urlString) else { return }
+       
+        let encoder = JSONEncoder()
+        var request = URLRequest(url: url)
+        do {
+            let httpBody = try encoder.encode(requestBody)
+            if let JSONString = String(data: httpBody, encoding: String.Encoding.utf8) {
+               print(JSONString)
+            }
+            request.httpBody = httpBody
+        } catch {
+            print("Error serializing CalorieFetch JSON \(error.localizedDescription)")
+        }
+                           
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+  
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if let error = error {
+                print("Failed to fetch calorie goal:", error)
+                completion(nil, error)
+                return
+            }
+            guard let data = data else { return }
+            do {
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                print("Decoded calorie in APIService")
+                completion(decodedData, nil)
+            } catch let jsonErr {
+                print("Failed to decode calorie json in APIService: ", jsonErr)
+//                print(String(data: data, encoding: String.Encoding.utf8))
+                completion(nil, jsonErr)
+            }
+            }.resume() //END URLSession
     }
     
     func fetch<T: Decodable>(urlString: String,requestBody: RecipeRequestBody, completion: @escaping (T?, Error?) -> ()) {
@@ -31,10 +74,7 @@ class APIService {
         } catch {
             print("Error serializing JSON \(error.localizedDescription)")
         }
-       
-        
-    
-        
+                           
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -48,7 +88,7 @@ class APIService {
             guard let data = data else { return }
             do {
                 let decodedData = try JSONDecoder().decode(T.self, from: data)
-                print("Decoded results in APIService")
+//                print("Decoded results in APIService")
                 completion(decodedData, nil)
             } catch let jsonErr {
 //                print("Failed to decode json in APIService: ", jsonErr)

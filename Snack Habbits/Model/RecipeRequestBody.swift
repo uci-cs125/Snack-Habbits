@@ -16,17 +16,26 @@ struct RecipeRequestBody: Codable {
         self.profile = user
         self.context = context
     }
+    
 }
+
 
 struct Context: Codable {
     var mealsEaten: [Meal]
-    var caloriesBurned: Float
+    var dailySteps: Float
     var currHour: Int
     
-    init(meals: [Meal], caloriesBurned: Float, currHour: Int){
+    init(meals: [Meal], dailySteps: Float, currHour: Int){
         self.mealsEaten = meals
-        self.caloriesBurned = caloriesBurned
+        self.dailySteps = dailySteps
         self.currHour = currHour
     }
 }
 
+struct CalorieRequestBody: Codable {
+    var profile: User
+    
+    init(user: User){
+        self.profile = user
+    }
+}

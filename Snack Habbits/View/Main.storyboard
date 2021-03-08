@@ -426,12 +426,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="891" y="-7"/>
+            <point key="canvasLocation" x="1800.0000000000002" y="-7.3660714285714279"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Root Tab Bar Controller-->
         <scene sceneID="1yp-r4-IJD">
             <objects>
-                <tabBarController id="vg4-c2-bkP" sceneMemberID="viewController">
+                <tabBarController id="vg4-c2-bkP" customClass="RootTabBarController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="IcY-NQ-mDe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -440,13 +440,30 @@
                     <connections>
                         <segue destination="lwU-n1-aKd" kind="relationship" relationship="viewControllers" id="iZ9-Dx-9D9"/>
                         <segue destination="my2-6b-bLo" kind="relationship" relationship="viewControllers" id="iNB-iH-4LO"/>
+                        <segue destination="lZ3-3i-c2e" kind="relationship" relationship="viewControllers" id="hLo-lA-on8"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LLg-tp-kdl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-867" y="-749"/>
+            <point key="canvasLocation" x="-1646" y="-756"/>
         </scene>
-        <!--Recommendations Collection View Controller-->
+        <!--Calororic Intake-->
+        <scene sceneID="SEN-nl-qSz">
+            <objects>
+                <viewController id="Mlr-eQ-tnI" customClass="TrackingProgressViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QvG-6o-3Pf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="tSL-zF-nbF"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Calororic Intake" id="SmI-pz-PFd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Bs-MV-aQI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-736.23188405797111" y="51.5625"/>
+        </scene>
+        <!--Recipes For You-->
         <scene sceneID="lB6-Ua-Fxk">
             <objects>
                 <collectionViewController id="FU3-Hl-5VQ" customClass="RecommendationsCollectionViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
@@ -553,7 +570,7 @@
                             <outlet property="delegate" destination="FU3-Hl-5VQ" id="ovk-cc-cGE"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="Hmp-Mj-btl">
+                    <navigationItem key="navigationItem" title="Recipes For You" largeTitleDisplayMode="never" id="Hmp-Mj-btl">
                         <barButtonItem key="leftBarButtonItem" title="Settings" image="top_left_profile" id="vxd-PG-FY9">
                             <color key="tintColor" systemColor="placeholderTextColor"/>
                             <connections>
@@ -993,7 +1010,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1JB-K0-gQ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-81" y="-7"/>
+            <point key="canvasLocation" x="828.98550724637687" y="-7.3660714285714279"/>
         </scene>
         <!--Recipes-->
         <scene sceneID="0lV-Iu-Yij">
@@ -1228,11 +1245,31 @@
             </objects>
             <point key="canvasLocation" x="1473.913043478261" y="-1497.3214285714284"/>
         </scene>
+        <!--Progress-->
+        <scene sceneID="cbb-m5-lF4">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lZ3-3i-c2e" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Progress" image="progress" selectedImage="progress" id="ct8-iC-gYn"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="gQ7-ZR-wSs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Mlr-eQ-tnI" kind="relationship" relationship="rootViewController" id="aTV-DV-e5q"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZr-CN-6m0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1646.376811594203" y="51.5625"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="YHJ-RH-KaA"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="progress" width="25" height="25"/>
         <image name="recipeIcon" width="25" height="25"/>
         <image name="stubPhoto" width="2000" height="1333"/>
         <image name="top_left_profile" width="26" height="33.5"/>

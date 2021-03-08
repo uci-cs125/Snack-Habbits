@@ -21,5 +21,6 @@ class BaseCollectionViewController: UICollectionViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+ 
 }
 
