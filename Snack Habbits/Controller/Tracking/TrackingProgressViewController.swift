@@ -18,6 +18,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     var currentUser: User?
     var totalCalories = [Int]()
     var calorieGoal: Double = 2000.00
+    var previousLimit: Double = 2000.00
     var dateLabels = [String](){
         didSet{
             lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: dateLabels)
@@ -66,14 +67,14 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         view.addSubview(lineChartView)
         lineChartView.fillSuperview(padding: .init(top: 100, left: 0, bottom: 100, right: 0))
         fetchUserMeals()
-        fetchCalorieGoal()
+        
         self.navigationController?.navigationItem.title = "Weekly Progress"
     }
     
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        fetchCalorieGoal()
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
@@ -81,12 +82,13 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     }
     
     
-    private func updateLineLimit(_ value: Double, label: String) {
-        if let line = lineChartView.rightAxis.limitLines.filter({ $0.label == label }).first {
-            line.limit = value
-            lineChartView.animate(yAxisDuration: 0.00001)
-        }
-    }
+//    private func updateLineLimit(_ value: Double, label: String) {
+//        if let line = lineChartView.leftAxis.limitLines.filter({ $0.label == label }).first {
+//            print("Updating limitLine")
+//            line.limit = value
+//            lineChartView.animate(yAxisDuration: 0.00001)
+//        }
+//    }
     
     func setData() {
         let gradientColors = [#colorLiteral(red: 0.9961868229, green: 0, blue: 0.3499520317, alpha: 1).cgColor, #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor] as CFArray
@@ -103,23 +105,14 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         set1.drawHorizontalHighlightIndicatorEnabled = false
         set1.highlightColor  = .red
         
-   
+//        self.addLimitLines(limit: Double(calorieGoal))
         
         let data = LineChartData(dataSet: set1)
         data.setDrawValues(false)
         lineChartView.data = data
     }
     
-    func addLimitLines(limit: Double) {
-        let calorieGoal = ChartLimitLine(limit: limit, label: "Goal: \(Int(limit))")
-        calorieGoal.lineWidth = 0.5
-        calorieGoal.lineColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
-        calorieGoal.lineDashLengths = [8.0]
-        lineChartView.leftAxis.addLimitLine(calorieGoal)
-        lineChartView.animate(yAxisDuration: 0.00001)
 
-
-    }
     
     //MARK:- Firestore
     //MARK:- API Service
@@ -155,8 +148,6 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     }
     
     private func fetchUserMeals(){
-//        meals = [Meal]()
-       
         let entry = ChartDataEntry(x: Double(0.0), y: Double(0.0))
         self.calorieValues.append(entry)
         
@@ -212,13 +203,28 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
             self.calorieGoal = Double(calorieIntake)
             DispatchQueue.main.async {
                 print("RD CALORIES: \(calorieIntake)")
-                self.addLimitLines(limit: Double(calorieIntake))
+                self.addLimitLines(limit: (Double(calorieIntake)))
+                
             }
 
         } // END get Recipes
     }
     
+    func addLimitLines(limit: Double) {
+        if let line = lineChartView.leftAxis.limitLines.filter({ $0.label == "Goal \(Int(previousLimit))" }).first {
+            lineChartView.leftAxis.removeLimitLine(line)
+        }
+        self.previousLimit = limit
+        let calorieGoal = ChartLimitLine(limit: limit, label: "Goal \(Int(limit))")
+        calorieGoal.lineWidth = 0.5
+        calorieGoal.lineColor = #colorLiteral(red: 0.4392156899, green: 0.01176470611, blue: 0.1921568662, alpha: 1)
+        calorieGoal.lineDashLengths = [8.0]
+        lineChartView.leftAxis.addLimitLine(calorieGoal)
+        lineChartView.animate(yAxisDuration: 0.00001)
 
+
+    }
+    
     func getDates() {
         let cal = Calendar.current
         var date = cal.startOfDay(for: Date())
