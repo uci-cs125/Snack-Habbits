@@ -167,28 +167,33 @@ extension TodaysMealsTableViewController: SwipeTableViewCellDelegate {
             self.tableView.reloadData()
         }
         
-//        let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
-//
-//            let editToDoVC = EditToDoTableController()
-//            editToDoVC.toDo = self.toDoTasks?[indexPath.row]
-//            self.navigationController?.pushViewController(editToDoVC, animated: true)
-//            // Dismiss swipe
-//            action.hidesWhenSelected = true
-//            self.swipedIndex = nil
-//
-//
-//        }
+        let editAction = SwipeAction(style: .default, title: nil) { action, indexPath in
+            action.hidesWhenSelected = true
+            self.swipedIndex = nil
+            let storyboard = UIStoryboard(name: "Main", bundle:  Bundle(for: type(of: self)))
+
+            let editMealVC = storyboard.instantiateViewController(identifier: "MealInput") as MealInputTableViewController
+            
+            editMealVC.delegate = self
+            editMealVC.editMeal = self.meals[indexPath.row]
+            editMealVC.enabled = true
+            //editToDoVC.toDo = self.toDoTasks?[indexPath.row]
+            self.navigationController?.pushViewController(editMealVC, animated: true)
+            // Dismiss swipe
+
+
+
+        }
         
         // customize the action appearance
         deleteAction.image = #imageLiteral(resourceName: "trash-icon-white").resizedImage(newSize: CGSize(width: 28  , height: 28))
-        deleteAction.backgroundColor = #colorLiteral(red: 1, green: 0, blue: 0.009361755543, alpha: 1)
-//
-//        editAction.image = UIImage.ToDo.settings.resizedImage(newSize: CGSize(width: 28 , height: 28))
-//        editAction.backgroundColor = UIColor.ToDo.editSwipeBackgroundColor
-//
-//        return [deleteAction, editAction]
+        deleteAction.backgroundColor = #colorLiteral(red: 0.8881979585, green: 0.3072378635, blue: 0.2069461644, alpha: 1)
+
+        editAction.image = #imageLiteral(resourceName: "settings-icon").resizedImage(newSize: CGSize(width: 28 , height: 28))
+        editAction.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
+
+        return [deleteAction, editAction]
         
-        return [deleteAction]
         
     }
     

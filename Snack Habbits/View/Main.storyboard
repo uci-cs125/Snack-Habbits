@@ -1089,7 +1089,7 @@
         <!--Meal Input Table View Controller-->
         <scene sceneID="JfC-QY-bvg">
             <objects>
-                <tableViewController id="BLC-Zw-CIo" customClass="MealInputTableViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MealInput" id="BLC-Zw-CIo" customClass="MealInputTableViewController" customModule="Snack_Habbits" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="pyB-oL-SfY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1125,16 +1125,28 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Calories " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RKF-7g-dDV">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="250" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(kcals)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2xC-19-C05">
+                                                    <rect key="frame" x="294" y="0.0" width="60" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="ZuG-5X-ng4"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="RKF-7g-dDV" secondAttribute="bottom" id="HiO-YD-o1p"/>
-                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="top" secondItem="ABT-zR-fuG" secondAttribute="top" id="NTQ-DI-Wew"/>
-                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="leading" secondItem="ABT-zR-fuG" secondAttribute="leading" constant="20" symbolic="YES" id="k0D-FV-RRZ"/>
-                                                <constraint firstAttribute="trailing" secondItem="RKF-7g-dDV" secondAttribute="trailing" constant="20" symbolic="YES" id="pPX-Px-z3e"/>
+                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="top" secondItem="ABT-zR-fuG" secondAttribute="top" id="XiK-e3-8Qs"/>
+                                                <constraint firstItem="RKF-7g-dDV" firstAttribute="leading" secondItem="ABT-zR-fuG" secondAttribute="leading" constant="20" symbolic="YES" id="Z1T-9p-tVj"/>
+                                                <constraint firstAttribute="bottom" secondItem="RKF-7g-dDV" secondAttribute="bottom" id="jCB-Tr-pI9"/>
+                                                <constraint firstAttribute="bottom" secondItem="2xC-19-C05" secondAttribute="bottom" id="kwV-m4-RN5"/>
+                                                <constraint firstItem="2xC-19-C05" firstAttribute="leading" secondItem="RKF-7g-dDV" secondAttribute="trailing" constant="24" id="kxO-c5-HBA"/>
+                                                <constraint firstAttribute="trailing" secondItem="2xC-19-C05" secondAttribute="trailing" constant="20" symbolic="YES" id="sMw-bB-jVI"/>
+                                                <constraint firstItem="2xC-19-C05" firstAttribute="top" secondItem="ABT-zR-fuG" secondAttribute="top" id="vhX-Rb-zSt"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1146,16 +1158,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Fat (g) " textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tTH-Dh-HSD">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="250" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="OC8-gz-zbF"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(fat g)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HwF-jj-a8R">
+                                                    <rect key="frame" x="294" y="0.0" width="60" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="P4C-JL-naE"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="tTH-Dh-HSD" secondAttribute="trailing" constant="20" symbolic="YES" id="Jsl-Ja-uEK"/>
-                                                <constraint firstAttribute="bottom" secondItem="tTH-Dh-HSD" secondAttribute="bottom" id="eq4-BT-DcE"/>
-                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="top" secondItem="qbN-wv-XPf" secondAttribute="top" id="fsk-uW-SrT"/>
-                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="leading" secondItem="qbN-wv-XPf" secondAttribute="leading" constant="20" symbolic="YES" id="kwB-W4-SG6"/>
+                                                <constraint firstAttribute="bottom" secondItem="tTH-Dh-HSD" secondAttribute="bottom" id="Gmx-oP-gb9"/>
+                                                <constraint firstItem="HwF-jj-a8R" firstAttribute="leading" secondItem="tTH-Dh-HSD" secondAttribute="trailing" constant="24" id="PEx-FT-dQC"/>
+                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="top" secondItem="qbN-wv-XPf" secondAttribute="top" id="QOm-Tt-0JJ"/>
+                                                <constraint firstItem="tTH-Dh-HSD" firstAttribute="leading" secondItem="qbN-wv-XPf" secondAttribute="leading" constant="20" symbolic="YES" id="Y6S-kB-5GM"/>
+                                                <constraint firstAttribute="trailing" secondItem="HwF-jj-a8R" secondAttribute="trailing" constant="20" symbolic="YES" id="a9O-kD-QY7"/>
+                                                <constraint firstAttribute="bottom" secondItem="HwF-jj-a8R" secondAttribute="bottom" id="j68-Or-c0k"/>
+                                                <constraint firstItem="HwF-jj-a8R" firstAttribute="top" secondItem="qbN-wv-XPf" secondAttribute="top" id="jic-vt-81h"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1167,16 +1194,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Carbs (g)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="T9F-Ap-c0b">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="250" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="0JE-YJ-QgE"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(carbs g)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuq-gs-IbV">
+                                                    <rect key="frame" x="294" y="0.0" width="60" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="3gv-KG-19n"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="T9F-Ap-c0b" secondAttribute="trailing" constant="20" symbolic="YES" id="DDR-5E-g5E"/>
-                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="leading" secondItem="poM-tl-E89" secondAttribute="leading" constant="20" symbolic="YES" id="QT8-gw-MI7"/>
-                                                <constraint firstAttribute="bottom" secondItem="T9F-Ap-c0b" secondAttribute="bottom" id="gGK-uT-foR"/>
-                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="top" secondItem="poM-tl-E89" secondAttribute="top" id="mfZ-Cr-iQI"/>
+                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="top" secondItem="poM-tl-E89" secondAttribute="top" id="2SW-z8-8tO"/>
+                                                <constraint firstItem="cuq-gs-IbV" firstAttribute="leading" secondItem="T9F-Ap-c0b" secondAttribute="trailing" constant="24" id="AIv-SF-QOD"/>
+                                                <constraint firstAttribute="bottom" secondItem="T9F-Ap-c0b" secondAttribute="bottom" id="dew-0s-4YO"/>
+                                                <constraint firstItem="T9F-Ap-c0b" firstAttribute="leading" secondItem="poM-tl-E89" secondAttribute="leading" constant="20" symbolic="YES" id="n0F-uo-xPP"/>
+                                                <constraint firstAttribute="bottom" secondItem="cuq-gs-IbV" secondAttribute="bottom" id="oLu-OG-3Wq"/>
+                                                <constraint firstAttribute="trailing" secondItem="cuq-gs-IbV" secondAttribute="trailing" constant="20" symbolic="YES" id="qHH-s2-mlC"/>
+                                                <constraint firstItem="cuq-gs-IbV" firstAttribute="top" secondItem="poM-tl-E89" secondAttribute="top" id="ttP-Zg-J0a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1188,16 +1230,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Total Protein (g)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Cm-GB-G2A">
-                                                    <rect key="frame" x="20" y="0.0" width="334" height="44"/>
+                                                    <rect key="frame" x="20" y="0.0" width="250" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="250" id="70W-ek-qxY"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(protein g)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QvL-C4-IDN">
+                                                    <rect key="frame" x="294" y="0.0" width="60" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="k4z-hn-IKc"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="top" secondItem="v29-rC-uk6" secondAttribute="top" id="8iS-LU-Hkh"/>
-                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="leading" secondItem="v29-rC-uk6" secondAttribute="leading" constant="20" symbolic="YES" id="QYj-qx-X2M"/>
-                                                <constraint firstAttribute="trailing" secondItem="0Cm-GB-G2A" secondAttribute="trailing" constant="20" symbolic="YES" id="t4R-51-oYL"/>
-                                                <constraint firstAttribute="bottom" secondItem="0Cm-GB-G2A" secondAttribute="bottom" id="v1H-sW-xj7"/>
+                                                <constraint firstItem="QvL-C4-IDN" firstAttribute="top" secondItem="v29-rC-uk6" secondAttribute="top" id="1ob-sk-5CV"/>
+                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="top" secondItem="v29-rC-uk6" secondAttribute="top" id="FqS-ft-Khm"/>
+                                                <constraint firstItem="QvL-C4-IDN" firstAttribute="leading" secondItem="0Cm-GB-G2A" secondAttribute="trailing" constant="24" id="MFP-xr-TP3"/>
+                                                <constraint firstAttribute="trailing" secondItem="QvL-C4-IDN" secondAttribute="trailing" constant="20" symbolic="YES" id="Qbh-ws-ygu"/>
+                                                <constraint firstAttribute="bottom" secondItem="QvL-C4-IDN" secondAttribute="bottom" id="juP-Jh-2fZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="0Cm-GB-G2A" secondAttribute="bottom" id="kdy-PM-ci3"/>
+                                                <constraint firstItem="0Cm-GB-G2A" firstAttribute="leading" secondItem="v29-rC-uk6" secondAttribute="leading" constant="20" symbolic="YES" id="zPT-pc-QeC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>

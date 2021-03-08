@@ -20,6 +20,8 @@ class MealInputTableViewController: UITableViewController {
             updateLabels(with: meal)
         }
     }
+    
+    var editMeal: Meal?
     var delegate: MealInputTableViewControllerDelegate?
     
     //MARK:- UI Elements
@@ -30,14 +32,19 @@ class MealInputTableViewController: UITableViewController {
     @IBOutlet weak var totalProteinLabel: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
+    var enabled = false
     //MARK:- Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
-        saveButton.isEnabled = false
+        saveButton.isEnabled = enabled
         
         mealNameLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         totalCaloriesLabel.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        
+        if let eMeal = editMeal {
+            self.meal = eMeal
+        }
     }
 
 
