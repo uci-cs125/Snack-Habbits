@@ -37,7 +37,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         chartView.legend.enabled = false
         let yAxis = chartView.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
-        yAxis.setLabelCount(6, force: false)
+        yAxis.setLabelCount(4, force: false)
         yAxis.labelTextColor = .black
         yAxis.axisLineColor = .black
         yAxis.labelPosition = .insideChart
@@ -60,8 +60,6 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         getDates()
         setData()
         view.addSubview(lineChartView)
@@ -82,21 +80,13 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     }
     
     
-//    private func updateLineLimit(_ value: Double, label: String) {
-//        if let line = lineChartView.leftAxis.limitLines.filter({ $0.label == label }).first {
-//            print("Updating limitLine")
-//            line.limit = value
-//            lineChartView.animate(yAxisDuration: 0.00001)
-//        }
-//    }
-    
     func setData() {
         let gradientColors = [#colorLiteral(red: 0.9961868229, green: 0, blue: 0.3499520317, alpha: 1).cgColor, #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0).cgColor] as CFArray
         let colorLocations:[CGFloat] = [1.0, 0.0]
         let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(), colors: gradientColors, locations: colorLocations) // Gradient Object
         let set1 = LineChartDataSet(entries: calorieValues, label: "Calories")
         set1.drawCirclesEnabled = false
-//        set1.mode = .horizontalBezier
+        set1.mode = .horizontalBezier
         set1.lineWidth = 3
         set1.setColor(.white)
         set1.fill = Fill.fillWithLinearGradient(gradient!, angle: 90.0)
@@ -148,7 +138,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
     }
     
     private func fetchUserMeals(){
-        let entry = ChartDataEntry(x: Double(0.0), y: Double(0.0))
+        let entry = ChartDataEntry(x: Double(0.0), y: Double(2000.0))
         self.calorieValues.append(entry)
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -163,15 +153,15 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
             for (i, date) in self.dates.enumerated(){
                 print("i\(i), date\(date)")
                 var totalCals : Float = 0.0
+                // If no meals were input on date set entry to 0
                 guard let _ = dictionary[date] else
                 {
-                    let entry = ChartDataEntry(x: Double(i), y: Double(totalCals))
+                    let entry = ChartDataEntry(x: Double(i), y: Double(self.calorieGoal))
                     self.calorieValues.append(entry)
                     continue
                 }
+                // Sum all meals from given date and set data point
                 let mealDict = dictionary[date]! as! [Any]
-                
-                
                 for meal in mealDict {
                     if let data = try? JSONSerialization.data(withJSONObject: meal, options: []){
                         if let parsedMeal = try? JSONDecoder().decode(Meal.self, from: data) {
@@ -186,6 +176,8 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
             }
             
             DispatchQueue.main.async {
+                self.calorieValues[0] = self.calorieValues[1]
+                self.calorieValues[8] = self.calorieValues[7]
                 self.setData()
             }
         }
