@@ -64,7 +64,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         setData()
         view.addSubview(lineChartView)
         lineChartView.fillSuperview(padding: .init(top: 100, left: 0, bottom: 100, right: 0))
-        fetchUserMeals()
+        
         
         self.navigationController?.navigationItem.title = "Weekly Progress"
     }

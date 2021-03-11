@@ -32,7 +32,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-
+        
         collectionView?.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.title = "Recipes For You"
@@ -41,13 +41,14 @@ class RecommendationsCollectionViewController: UICollectionViewController {
 //        navigationController?.navigationBar.prefersLargeTitles = true
         super.viewWillAppear(animated)
         if Auth.auth().currentUser == nil {
+            authorizeHealthKit()
             let loginController = LoginViewController()
             loginController.delegate = self
             let navController = UINavigationController(rootViewController: loginController)
             navController.modalPresentationStyle = .fullScreen
             present(navController, animated: true)
         } else {
-            authorizeHealthKit()
+            
             getSteps { (steps) in
                 self.updateUserSteps(count: steps)
             }

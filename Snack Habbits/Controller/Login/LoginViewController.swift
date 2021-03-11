@@ -8,7 +8,7 @@
 
 import UIKit
 import JGProgressHUD
-
+import HealthKit
 protocol LoginControllerDelegate {
     func didFinishLoggingIn()
 }
@@ -99,6 +99,30 @@ class LoginViewController: UIViewController {
         }
     }
 
+    private func authorizeHealthKit() {
+        HealthKitSetupAssistant.authorizeHealthKit { (authorized, error) in
+              
+          guard authorized else {
+                
+            let baseMessage = "HealthKit Authorization Failed"
+                
+            if let error = error {
+              print("\(baseMessage). Reason: \(error.localizedDescription)")
+            } else {
+              print(baseMessage)
+            }
+                
+            return
+          }
+              
+          print("HealthKit Successfully Authorized.")
+//            self.getSteps { (steps) in
+//                self.updateUserSteps(count: steps)
+//            }
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -106,6 +130,7 @@ class LoginViewController: UIViewController {
         setupLayout()
         
         setupBindables()
+        authorizeHealthKit()
     }
     
     fileprivate let loginViewModel = LoginViewModel()
