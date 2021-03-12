@@ -192,9 +192,12 @@ class RecommendationsCollectionViewController: UICollectionViewController {
                 
             }
             // Make sure meals actually exists for the date
-            guard let _ = dictionary[date] else { return }
+            guard let _ = dictionary[date] else {
+                self.semaphore.signal()
+                return                
+            }
             let mealDict = dictionary[date]! as! [Any]
-                            
+            print("mealDict \(mealDict)")
             for meal in mealDict {
                 if let data = try? JSONSerialization.data(withJSONObject: meal, options: []){
                     if let parsedMeal = try? JSONDecoder().decode(Meal.self, from: data) {
@@ -204,7 +207,7 @@ class RecommendationsCollectionViewController: UICollectionViewController {
                     
             }
             self.semaphore.signal()
- 
+            print("Leaving fetch meals")
         } // END get Meals
     }
     

@@ -37,7 +37,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         chartView.legend.enabled = false
         let yAxis = chartView.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 12)
-        yAxis.setLabelCount(4, force: false)
+        yAxis.setLabelCount(7, force: false)
         yAxis.labelTextColor = .black
         yAxis.axisLineColor = .black
         yAxis.labelPosition = .insideChart
@@ -54,17 +54,20 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
         let marker:BalloonMarker = BalloonMarker(color: UIColor.black, font: UIFont(name: "Helvetica", size: 12)!, textColor: UIColor.white, insets: UIEdgeInsets(top: 7.0, left: 7.0, bottom: 7.0, right: 7.0))
         marker.minimumSize = CGSize(width: 75.0, height: 35.0)
         chartView.marker = marker
-//        chartView.animate(xAxisDuration: 0.5)
+        chartView.autoScaleMinMaxEnabled = true
+//        chartView.animate(xAxisDuration: 1.0)
         return chartView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Getting Dates")
         getDates()
+        print("Setting Dates")
         setData()
         view.addSubview(lineChartView)
         lineChartView.fillSuperview(padding: .init(top: 100, left: 0, bottom: 100, right: 0))
-        
+        fetchUserMeals()
         
         self.navigationController?.navigationItem.title = "Weekly Progress"
     }
@@ -72,6 +75,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         fetchCalorieGoal()
     }
     
@@ -176,6 +180,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
             }
             
             DispatchQueue.main.async {
+                print("Resetting calorie Data")
                 self.calorieValues[0] = self.calorieValues[1]
                 self.calorieValues[8] = self.calorieValues[7]
                 self.setData()
@@ -194,7 +199,7 @@ class TrackingProgressViewController: UIViewController, ChartViewDelegate {
             guard let calorieIntake = results?.results[0] else { return }
             self.calorieGoal = Double(calorieIntake)
             DispatchQueue.main.async {
-                print("RD CALORIES: \(calorieIntake)")
+                print("RD CALORIES: \(calorieIntake)")               
                 self.addLimitLines(limit: (Double(calorieIntake)))
                 
             }
